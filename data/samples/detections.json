@@ -1,0 +1,684 @@
+{
+  "result": {
+    "config": {
+      "require_asn_change": true,
+      "max_travel_speed_kmh": 900.0,
+      "min_travel_distance_km": 500.0,
+      "ignore_user_agent_version": true,
+      "mfa_freshness_minutes": 60,
+      "bulk_case_threshold": 15,
+      "bulk_case_window_minutes": 10,
+      "business_hours_start": 7,
+      "business_hours_end": 20,
+      "service_baseline_hours": 24,
+      "suppression_minutes": 30
+    },
+    "rules": [
+      {
+        "rule_id": "OT-DET-001",
+        "name": "Session token reused from another IP",
+        "severity": "high",
+        "description": "Fires when an event in an existing session comes from a different IP address, on a different autonomous system, than the session's first event, with no new sign-in.",
+        "rationale": "A stolen session cookie lets an attacker skip the password and MFA entirely; the only trace is the same session ID appearing from new infrastructure.",
+        "mitre_techniques": [
+          "T1550.004",
+          "T1539"
+        ]
+      },
+      {
+        "rule_id": "OT-DET-002",
+        "name": "Impossible travel",
+        "severity": "high",
+        "description": "Fires when two consecutive events for the same user are more than the minimum distance apart and the implied speed exceeds the maximum (default 900 km/h, airliner cruise).",
+        "rationale": "A user cannot be in San Francisco and Frankfurt minutes apart; one of the two must be someone else using their credentials or session.",
+        "mitre_techniques": [
+          "T1078"
+        ]
+      },
+      {
+        "rule_id": "OT-DET-003",
+        "name": "New user agent on an existing session",
+        "severity": "medium",
+        "description": "Fires when an event's browser family and OS differ from the session's first event. Version-only changes (browser auto-updates) are ignored by default.",
+        "rationale": "Session cookies are bound to a browser. The same session suddenly appearing in a different browser on a different OS means the cookie was copied.",
+        "mitre_techniques": [
+          "T1550.004"
+        ]
+      },
+      {
+        "rule_id": "OT-DET-004",
+        "name": "Admin action without recent MFA",
+        "severity": "high",
+        "description": "Fires when an admin event (user, group, factor, token or policy change) happens on a session whose most recent successful MFA is older than the freshness limit, or absent.",
+        "rationale": "Legitimate admins step up with MFA before privileged work. A replayed session carries only the MFA from whenever the victim originally signed in.",
+        "mitre_techniques": [
+          "T1098",
+          "T1550.004"
+        ]
+      },
+      {
+        "rule_id": "OT-DET-005",
+        "name": "Bulk support-case access",
+        "severity": "medium",
+        "description": "Fires when one actor views at least the threshold number of distinct support cases within the sliding window (default 15 cases in 10 minutes).",
+        "rationale": "Support cases hold customer artefacts such as HAR files. Harvesting them shows up as rapid, broad access that normal triage does not reach.",
+        "mitre_techniques": [
+          "T1213"
+        ]
+      },
+      {
+        "rule_id": "OT-DET-006",
+        "name": "Off-hours admin action",
+        "severity": "medium",
+        "description": "Fires when an admin event happens outside business hours (default 07:00-20:00) or at a weekend, in the actor's home time zone from the directory.",
+        "rationale": "Attackers often act while the victim sleeps to delay discovery; planned maintenance is the main benign cause, so this is a medium-severity signal.",
+        "mitre_techniques": [
+          "T1078"
+        ]
+      },
+      {
+        "rule_id": "OT-DET-007",
+        "name": "Service account from a new network",
+        "severity": "high",
+        "description": "Learns the networks (ASNs) each service account signs in from during a baseline period, then flags later sign-ins from any other network and every event in those sessions.",
+        "rationale": "Service accounts run from fixed infrastructure, so a new network is a strong signal. The 2023 intrusion began with a stolen service-account credential.",
+        "mitre_techniques": [
+          "T1078"
+        ]
+      }
+    ],
+    "alerts": [
+      {
+        "id": "ALR-0001",
+        "rule_id": "OT-DET-001",
+        "rule_name": "Session token reused from another IP",
+        "severity": "high",
+        "first_seen": "2023-09-29T18:51:27.583000Z",
+        "last_seen": "2023-09-29T19:05:41.998000Z",
+        "actor": "taylor.murphy@acme.example",
+        "session_fingerprint": "e7c7d7e23e82",
+        "explanation": "session e7c7d7e23e82 for taylor.murphy@acme.example was established from 192.0.2.12 (AS64512 Acme Synthetic Corp, San Francisco) but was used from 198.51.100.13 (AS64600 Bayline Broadband, San Francisco) 2h57m later, without a new sign-in. 3 matches from 2023-09-29 18:51 to 19:05 UTC were merged into this alert.",
+        "match_count": 3,
+        "event_uuids": [
+          "46b279bc-58af-4df0-bb65-eb85ecd246bf",
+          "a110f240-f459-4d0c-b509-6b28885525a5",
+          "e4bbd5b9-fbb9-4e0b-bd78-ed049c63f8e9"
+        ],
+        "context_event_uuids": [
+          "acdaa39c-b548-45f5-80ae-d757b4d6ba36"
+        ],
+        "details": {
+          "origin_ip": "192.0.2.12",
+          "origin_asn": 64512,
+          "new_ip": "198.51.100.13",
+          "new_asn": 64600
+        },
+        "mitre_techniques": [
+          "T1550.004",
+          "T1539"
+        ]
+      },
+      {
+        "id": "ALR-0002",
+        "rule_id": "OT-DET-006",
+        "rule_name": "Off-hours admin action",
+        "severity": "medium",
+        "first_seen": "2023-09-30T10:11:00Z",
+        "last_seen": "2023-09-30T10:18:28.373000Z",
+        "actor": "mei.ibrahim@acme.example",
+        "session_fingerprint": "caeda8f69c75",
+        "explanation": "group.user_membership.remove by mei.ibrahim@acme.example at Sat 03:11 local time (UTC-7), at the weekend (07:00-20:00, Mon-Fri). 3 matches from 2023-09-30 10:11 to 10:18 UTC were merged into this alert.",
+        "match_count": 3,
+        "event_uuids": [
+          "4f4aa35d-dbf0-41d7-bb94-610647530109",
+          "04d0cca5-bb60-4336-8bb2-69a96407d274",
+          "1eb2e168-7392-4f21-8821-6a403362ad0a"
+        ],
+        "context_event_uuids": [],
+        "details": {
+          "local_time": "2023-09-30 03:11",
+          "weekend": true
+        },
+        "mitre_techniques": [
+          "T1078"
+        ]
+      },
+      {
+        "id": "ALR-0003",
+        "rule_id": "OT-DET-002",
+        "rule_name": "Impossible travel",
+        "severity": "high",
+        "first_seen": "2023-10-02T19:52:07Z",
+        "last_seen": "2023-10-02T20:06:01.222000Z",
+        "actor": "svc-case-sync@support.vendor.example",
+        "session_fingerprint": "7534908f0dd6",
+        "explanation": "svc-case-sync@support.vendor.example was seen in Frankfurt am Main 46m10s after Ashburn: 6,549 km, an implied 8,511 km/h (limit 900 km/h). 2 matches from 2023-10-02 19:52 to 20:06 UTC were merged into this alert.",
+        "match_count": 2,
+        "event_uuids": [
+          "1ab70dc5-7b2e-4877-a14b-96b5c51d2bda",
+          "126e14dc-e53e-4123-936d-8dad8ee37cde"
+        ],
+        "context_event_uuids": [
+          "118ef43f-7a37-4e19-bb0e-f36db3d8918e",
+          "801fab14-4e02-4aa6-b433-ac316c8fa094"
+        ],
+        "details": {
+          "from_city": "Ashburn",
+          "to_city": "Frankfurt am Main",
+          "distance_km": 6548.9,
+          "speed_kmh": 8510.6
+        },
+        "mitre_techniques": [
+          "T1078"
+        ]
+      },
+      {
+        "id": "ALR-0004",
+        "rule_id": "OT-DET-007",
+        "rule_name": "Service account from a new network",
+        "severity": "high",
+        "first_seen": "2023-10-02T19:52:07Z",
+        "last_seen": "2023-10-02T19:57:41.135000Z",
+        "actor": "svc-case-sync@support.vendor.example",
+        "session_fingerprint": "7534908f0dd6",
+        "explanation": "Service account svc-case-sync@support.vendor.example signed in from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main), outside the networks seen in its first 24h (AS64800). 13 matches from 2023-10-02 19:52 to 19:57 UTC were merged into this alert.",
+        "match_count": 13,
+        "event_uuids": [
+          "1ab70dc5-7b2e-4877-a14b-96b5c51d2bda",
+          "22c00349-afa2-4525-8671-4e9729f92378",
+          "d9d723f0-5c06-43c3-b9d6-d8300ce47185",
+          "beaa6512-b389-4971-a38a-b453561083b7",
+          "552d12fc-ae13-4959-8cc0-a2ceb8af0003",
+          "95262cd0-254c-4999-ba41-33e4ab75061b",
+          "7e3a2fb7-2943-425b-b289-15c30d6276c2",
+          "beb911c4-6942-4e42-92b5-f938b39bd74b",
+          "a826092e-64b6-4bde-b576-bedf9e4701a0",
+          "d6a8f510-871a-4eda-8c43-00a80af1f03b",
+          "a50ea3e4-20fb-46f2-831c-ff5a7ecd3fdd",
+          "1c32df63-0fc4-4d76-8733-523f0383290a",
+          "801fab14-4e02-4aa6-b433-ac316c8fa094"
+        ],
+        "context_event_uuids": [],
+        "details": {
+          "asn": 65066,
+          "known_asns": [
+            64800
+          ]
+        },
+        "mitre_techniques": [
+          "T1078"
+        ]
+      },
+      {
+        "id": "ALR-0005",
+        "rule_id": "OT-DET-001",
+        "rule_name": "Session token reused from another IP",
+        "severity": "high",
+        "first_seen": "2023-10-02T22:04:10Z",
+        "last_seen": "2023-10-02T22:12:17.800000Z",
+        "actor": "jordan.rivera@acme.example",
+        "session_fingerprint": "c85dd9d19760",
+        "explanation": "session c85dd9d19760 for jordan.rivera@acme.example was established from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) but was used from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) 7h34m later, without a new sign-in. 32 matches from 2023-10-02 22:04 to 22:12 UTC were merged into this alert.",
+        "match_count": 32,
+        "event_uuids": [
+          "eb34874a-d922-4cdc-a7ab-4c836ba54254",
+          "d5b564ba-17ba-426f-bb58-e461e2c55a30",
+          "e60f137b-e12a-4235-a0d2-5116347912c8",
+          "26b68970-de04-4dcc-96f3-02cc8915c77e",
+          "09d36cdd-f72a-4d39-b0e6-4b5b697f8f5e",
+          "5c09484d-26e6-4189-97db-b5a7843c18e8",
+          "0fcf084a-f239-4e47-923d-df0350aacd8c",
+          "1d9ea2ae-1ae5-42d8-90d4-dd53433e6489",
+          "c4e0d8fa-d522-4aa9-9369-70cc56ba9728",
+          "c08c512f-7dc4-41fd-9a14-f8ac80d51ac8",
+          "f4f4ffe2-c5e0-48fe-b09f-689994484cdd",
+          "3457296f-4791-4c2f-bd5b-4acd59469954",
+          "5c9e6c5e-05cb-4069-9fb2-ff44b26652b2",
+          "b4615997-b9ac-4de7-8ea6-32db2857cfb9",
+          "deecb7eb-8dba-4bae-a652-fe4bfa7fa855",
+          "0265248e-4bde-40cb-9afa-266c6cf324d7",
+          "dd5d7414-1818-4c8f-b9fc-b620ea1fd27b",
+          "a39a8461-9346-4d89-b8d4-74ab6cc87589",
+          "6a2c4b67-386b-4b14-b95b-792ec9cd03b6",
+          "627e610e-b51a-4c53-8355-f10c81af3cbc",
+          "10acaa9d-93a0-4e29-98d8-22cf92268885",
+          "f1582f42-65fd-4361-9678-4ae270d86ef6",
+          "20e2c44d-ed3a-403a-87e0-2ca836146799",
+          "2b19e654-ea69-4473-b4af-16823e3ca777",
+          "c9266f9e-85f1-4027-8929-b9df4c2e8bdb",
+          "40400256-3590-440b-b35c-c04b6901e123",
+          "d0d59100-4289-43bd-82c5-3dfee4ebf0b4",
+          "6ca72a36-cf97-4876-b994-a8a1838e610b",
+          "781c3274-c5c3-4815-8d1b-201251bca21d",
+          "0424b92a-1aea-454b-86a3-05fb1a1a5db1",
+          "f74fb801-2f24-432f-8d17-5215e0ceb351",
+          "221c53e1-0dbf-4042-aac9-a1a4aedfc454"
+        ],
+        "context_event_uuids": [
+          "32eb3d06-2bfe-430d-90fd-56ead80d73a6"
+        ],
+        "details": {
+          "origin_ip": "192.0.2.11",
+          "origin_asn": 64512,
+          "new_ip": "203.0.113.211",
+          "new_asn": 65066
+        },
+        "mitre_techniques": [
+          "T1550.004",
+          "T1539"
+        ]
+      },
+      {
+        "id": "ALR-0006",
+        "rule_id": "OT-DET-002",
+        "rule_name": "Impossible travel",
+        "severity": "high",
+        "first_seen": "2023-10-02T22:04:10Z",
+        "last_seen": "2023-10-02T22:13:10Z",
+        "actor": "jordan.rivera@acme.example",
+        "session_fingerprint": "c85dd9d19760",
+        "explanation": "jordan.rivera@acme.example was seen in Frankfurt am Main 5m40s after San Francisco: 9,133 km, an implied 96,707 km/h (limit 900 km/h). 2 matches from 2023-10-02 22:04 to 22:13 UTC were merged into this alert.",
+        "match_count": 2,
+        "event_uuids": [
+          "eb34874a-d922-4cdc-a7ab-4c836ba54254",
+          "780e819e-2ff5-4679-aa5f-9755db3227c6"
+        ],
+        "context_event_uuids": [
+          "5d1b8c75-3898-402c-8f78-e78c843a763d",
+          "221c53e1-0dbf-4042-aac9-a1a4aedfc454"
+        ],
+        "details": {
+          "from_city": "San Francisco",
+          "to_city": "Frankfurt am Main",
+          "distance_km": 9133.4,
+          "speed_kmh": 96706.8
+        },
+        "mitre_techniques": [
+          "T1078"
+        ]
+      },
+      {
+        "id": "ALR-0007",
+        "rule_id": "OT-DET-003",
+        "rule_name": "New user agent on an existing session",
+        "severity": "medium",
+        "first_seen": "2023-10-02T22:04:10Z",
+        "last_seen": "2023-10-02T22:12:17.800000Z",
+        "actor": "jordan.rivera@acme.example",
+        "session_fingerprint": "c85dd9d19760",
+        "explanation": "session c85dd9d19760 for jordan.rivera@acme.example started in CHROME on Mac OS X but continued in FIREFOX on Windows 10. 32 matches from 2023-10-02 22:04 to 22:12 UTC were merged into this alert.",
+        "match_count": 32,
+        "event_uuids": [
+          "eb34874a-d922-4cdc-a7ab-4c836ba54254",
+          "d5b564ba-17ba-426f-bb58-e461e2c55a30",
+          "e60f137b-e12a-4235-a0d2-5116347912c8",
+          "26b68970-de04-4dcc-96f3-02cc8915c77e",
+          "09d36cdd-f72a-4d39-b0e6-4b5b697f8f5e",
+          "5c09484d-26e6-4189-97db-b5a7843c18e8",
+          "0fcf084a-f239-4e47-923d-df0350aacd8c",
+          "1d9ea2ae-1ae5-42d8-90d4-dd53433e6489",
+          "c4e0d8fa-d522-4aa9-9369-70cc56ba9728",
+          "c08c512f-7dc4-41fd-9a14-f8ac80d51ac8",
+          "f4f4ffe2-c5e0-48fe-b09f-689994484cdd",
+          "3457296f-4791-4c2f-bd5b-4acd59469954",
+          "5c9e6c5e-05cb-4069-9fb2-ff44b26652b2",
+          "b4615997-b9ac-4de7-8ea6-32db2857cfb9",
+          "deecb7eb-8dba-4bae-a652-fe4bfa7fa855",
+          "0265248e-4bde-40cb-9afa-266c6cf324d7",
+          "dd5d7414-1818-4c8f-b9fc-b620ea1fd27b",
+          "a39a8461-9346-4d89-b8d4-74ab6cc87589",
+          "6a2c4b67-386b-4b14-b95b-792ec9cd03b6",
+          "627e610e-b51a-4c53-8355-f10c81af3cbc",
+          "10acaa9d-93a0-4e29-98d8-22cf92268885",
+          "f1582f42-65fd-4361-9678-4ae270d86ef6",
+          "20e2c44d-ed3a-403a-87e0-2ca836146799",
+          "2b19e654-ea69-4473-b4af-16823e3ca777",
+          "c9266f9e-85f1-4027-8929-b9df4c2e8bdb",
+          "40400256-3590-440b-b35c-c04b6901e123",
+          "d0d59100-4289-43bd-82c5-3dfee4ebf0b4",
+          "6ca72a36-cf97-4876-b994-a8a1838e610b",
+          "781c3274-c5c3-4815-8d1b-201251bca21d",
+          "0424b92a-1aea-454b-86a3-05fb1a1a5db1",
+          "f74fb801-2f24-432f-8d17-5215e0ceb351",
+          "221c53e1-0dbf-4042-aac9-a1a4aedfc454"
+        ],
+        "context_event_uuids": [
+          "32eb3d06-2bfe-430d-90fd-56ead80d73a6"
+        ],
+        "details": {
+          "original_agent": "CHROME on Mac OS X",
+          "new_agent": "FIREFOX on Windows 10"
+        },
+        "mitre_techniques": [
+          "T1550.004"
+        ]
+      },
+      {
+        "id": "ALR-0008",
+        "rule_id": "OT-DET-005",
+        "rule_name": "Bulk support-case access",
+        "severity": "medium",
+        "first_seen": "2023-10-02T22:08:32.772000Z",
+        "last_seen": "2023-10-02T22:12:17.800000Z",
+        "actor": "jordan.rivera@acme.example",
+        "session_fingerprint": "c85dd9d19760",
+        "explanation": "jordan.rivera@acme.example viewed 15 distinct support cases within 10 minutes (threshold 15). 16 matches from 2023-10-02 22:08 to 22:12 UTC were merged into this alert.",
+        "match_count": 16,
+        "event_uuids": [
+          "e60f137b-e12a-4235-a0d2-5116347912c8",
+          "26b68970-de04-4dcc-96f3-02cc8915c77e",
+          "09d36cdd-f72a-4d39-b0e6-4b5b697f8f5e",
+          "5c09484d-26e6-4189-97db-b5a7843c18e8",
+          "0fcf084a-f239-4e47-923d-df0350aacd8c",
+          "1d9ea2ae-1ae5-42d8-90d4-dd53433e6489",
+          "c4e0d8fa-d522-4aa9-9369-70cc56ba9728",
+          "c08c512f-7dc4-41fd-9a14-f8ac80d51ac8",
+          "f4f4ffe2-c5e0-48fe-b09f-689994484cdd",
+          "3457296f-4791-4c2f-bd5b-4acd59469954",
+          "5c9e6c5e-05cb-4069-9fb2-ff44b26652b2",
+          "b4615997-b9ac-4de7-8ea6-32db2857cfb9",
+          "deecb7eb-8dba-4bae-a652-fe4bfa7fa855",
+          "0265248e-4bde-40cb-9afa-266c6cf324d7",
+          "dd5d7414-1818-4c8f-b9fc-b620ea1fd27b",
+          "a39a8461-9346-4d89-b8d4-74ab6cc87589",
+          "6a2c4b67-386b-4b14-b95b-792ec9cd03b6",
+          "627e610e-b51a-4c53-8355-f10c81af3cbc",
+          "10acaa9d-93a0-4e29-98d8-22cf92268885",
+          "f1582f42-65fd-4361-9678-4ae270d86ef6",
+          "20e2c44d-ed3a-403a-87e0-2ca836146799",
+          "2b19e654-ea69-4473-b4af-16823e3ca777",
+          "c9266f9e-85f1-4027-8929-b9df4c2e8bdb",
+          "40400256-3590-440b-b35c-c04b6901e123",
+          "d0d59100-4289-43bd-82c5-3dfee4ebf0b4",
+          "6ca72a36-cf97-4876-b994-a8a1838e610b",
+          "781c3274-c5c3-4815-8d1b-201251bca21d",
+          "0424b92a-1aea-454b-86a3-05fb1a1a5db1",
+          "f74fb801-2f24-432f-8d17-5215e0ceb351",
+          "221c53e1-0dbf-4042-aac9-a1a4aedfc454"
+        ],
+        "context_event_uuids": [],
+        "details": {
+          "distinct_cases": 15
+        },
+        "mitre_techniques": [
+          "T1213"
+        ]
+      },
+      {
+        "id": "ALR-0009",
+        "rule_id": "OT-DET-001",
+        "rule_name": "Session token reused from another IP",
+        "severity": "high",
+        "first_seen": "2023-10-03T09:41:12Z",
+        "last_seen": "2023-10-03T09:44:59.708000Z",
+        "actor": "jordan.rivera@acme.example",
+        "session_fingerprint": "c85dd9d19760",
+        "explanation": "session c85dd9d19760 for jordan.rivera@acme.example was established from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) but was used from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) 19h11m later, without a new sign-in. 6 matches from 2023-10-03 09:41 to 09:44 UTC were merged into this alert.",
+        "match_count": 6,
+        "event_uuids": [
+          "5e955a48-c565-4fad-b1b7-fadef0a7cf6a",
+          "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05",
+          "dc71a62e-1a1d-4e2f-8e60-83ea82504078",
+          "4845f5ff-afa4-4b2f-9644-516fa6f94e55",
+          "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b",
+          "ae91650a-7ac0-4852-9f24-ee2a0d29f347"
+        ],
+        "context_event_uuids": [
+          "32eb3d06-2bfe-430d-90fd-56ead80d73a6"
+        ],
+        "details": {
+          "origin_ip": "192.0.2.11",
+          "origin_asn": 64512,
+          "new_ip": "203.0.113.211",
+          "new_asn": 65066
+        },
+        "mitre_techniques": [
+          "T1550.004",
+          "T1539"
+        ]
+      },
+      {
+        "id": "ALR-0010",
+        "rule_id": "OT-DET-003",
+        "rule_name": "New user agent on an existing session",
+        "severity": "medium",
+        "first_seen": "2023-10-03T09:41:12Z",
+        "last_seen": "2023-10-03T09:44:59.708000Z",
+        "actor": "jordan.rivera@acme.example",
+        "session_fingerprint": "c85dd9d19760",
+        "explanation": "session c85dd9d19760 for jordan.rivera@acme.example started in CHROME on Mac OS X but continued in FIREFOX on Windows 10. 6 matches from 2023-10-03 09:41 to 09:44 UTC were merged into this alert.",
+        "match_count": 6,
+        "event_uuids": [
+          "5e955a48-c565-4fad-b1b7-fadef0a7cf6a",
+          "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05",
+          "dc71a62e-1a1d-4e2f-8e60-83ea82504078",
+          "4845f5ff-afa4-4b2f-9644-516fa6f94e55",
+          "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b",
+          "ae91650a-7ac0-4852-9f24-ee2a0d29f347"
+        ],
+        "context_event_uuids": [
+          "32eb3d06-2bfe-430d-90fd-56ead80d73a6"
+        ],
+        "details": {
+          "original_agent": "CHROME on Mac OS X",
+          "new_agent": "FIREFOX on Windows 10"
+        },
+        "mitre_techniques": [
+          "T1550.004"
+        ]
+      },
+      {
+        "id": "ALR-0011",
+        "rule_id": "OT-DET-004",
+        "rule_name": "Admin action without recent MFA",
+        "severity": "high",
+        "first_seen": "2023-10-03T09:42:03Z",
+        "last_seen": "2023-10-03T09:44:59.708000Z",
+        "actor": "jordan.rivera@acme.example",
+        "session_fingerprint": "c85dd9d19760",
+        "explanation": "user.lifecycle.create by jordan.rivera@acme.example on session c85dd9d19760: the last MFA was 16h21m earlier (limit 60 min). 5 matches from 2023-10-03 09:42 to 09:44 UTC were merged into this alert.",
+        "match_count": 5,
+        "event_uuids": [
+          "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05",
+          "dc71a62e-1a1d-4e2f-8e60-83ea82504078",
+          "4845f5ff-afa4-4b2f-9644-516fa6f94e55",
+          "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b",
+          "ae91650a-7ac0-4852-9f24-ee2a0d29f347"
+        ],
+        "context_event_uuids": [
+          "d9cac2fd-224b-4255-8de4-6c6618e4a309"
+        ],
+        "details": {
+          "event_type": "user.lifecycle.create",
+          "mfa_age_minutes": 981
+        },
+        "mitre_techniques": [
+          "T1098",
+          "T1550.004"
+        ]
+      },
+      {
+        "id": "ALR-0012",
+        "rule_id": "OT-DET-006",
+        "rule_name": "Off-hours admin action",
+        "severity": "medium",
+        "first_seen": "2023-10-03T09:42:03Z",
+        "last_seen": "2023-10-03T09:44:59.708000Z",
+        "actor": "jordan.rivera@acme.example",
+        "session_fingerprint": "c85dd9d19760",
+        "explanation": "user.lifecycle.create by jordan.rivera@acme.example at Tue 02:42 local time (UTC-7), outside business hours (07:00-20:00, Mon-Fri). 5 matches from 2023-10-03 09:42 to 09:44 UTC were merged into this alert.",
+        "match_count": 5,
+        "event_uuids": [
+          "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05",
+          "dc71a62e-1a1d-4e2f-8e60-83ea82504078",
+          "4845f5ff-afa4-4b2f-9644-516fa6f94e55",
+          "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b",
+          "ae91650a-7ac0-4852-9f24-ee2a0d29f347"
+        ],
+        "context_event_uuids": [],
+        "details": {
+          "local_time": "2023-10-03 02:42",
+          "weekend": false
+        },
+        "mitre_techniques": [
+          "T1078"
+        ]
+      },
+      {
+        "id": "ALR-0013",
+        "rule_id": "OT-DET-002",
+        "rule_name": "Impossible travel",
+        "severity": "high",
+        "first_seen": "2023-10-03T15:15:05.674000Z",
+        "last_seen": "2023-10-03T15:15:05.674000Z",
+        "actor": "jordan.rivera@acme.example",
+        "session_fingerprint": "6baf6f1cb59a",
+        "explanation": "jordan.rivera@acme.example was seen in San Francisco 5h30m after Frankfurt am Main: 9,133 km, an implied 1,660 km/h (limit 900 km/h).",
+        "match_count": 1,
+        "event_uuids": [
+          "59ff14ed-d119-4fc6-84ce-ac6cacf8b0b3"
+        ],
+        "context_event_uuids": [
+          "ae91650a-7ac0-4852-9f24-ee2a0d29f347"
+        ],
+        "details": {
+          "from_city": "Frankfurt am Main",
+          "to_city": "San Francisco",
+          "distance_km": 9133.4,
+          "speed_kmh": 1660.1
+        },
+        "mitre_techniques": [
+          "T1078"
+        ]
+      }
+    ],
+    "events_analyzed": 5788
+  },
+  "evaluation": {
+    "alert_level": {
+      "total_alerts": 13,
+      "true_positive_alerts": 11,
+      "false_positive_alerts": 2,
+      "precision": 0.8462
+    },
+    "event_level": {
+      "attack_events": 51,
+      "flagged_events": 60,
+      "true_positive": 51,
+      "false_positive": 9,
+      "false_negative": 0,
+      "precision": 0.85,
+      "recall": 1.0,
+      "f1": 0.9189
+    },
+    "phases": [
+      {
+        "phase": "initial_access",
+        "attack_events": 1,
+        "detected_events": 1,
+        "recall": 1.0
+      },
+      {
+        "phase": "har_exfiltration",
+        "attack_events": 12,
+        "detected_events": 12,
+        "recall": 1.0
+      },
+      {
+        "phase": "session_replay",
+        "attack_events": 3,
+        "detected_events": 3,
+        "recall": 1.0
+      },
+      {
+        "phase": "case_collection",
+        "attack_events": 30,
+        "detected_events": 30,
+        "recall": 1.0
+      },
+      {
+        "phase": "admin_attempt",
+        "attack_events": 5,
+        "detected_events": 5,
+        "recall": 1.0
+      }
+    ],
+    "per_rule": [
+      {
+        "rule_id": "OT-DET-001",
+        "name": "Session token reused from another IP",
+        "alerts": 3,
+        "true_positive_alerts": 2,
+        "false_positive_alerts": 1,
+        "precision": 0.6667,
+        "attack_events_flagged": 38,
+        "flagged_events": 41
+      },
+      {
+        "rule_id": "OT-DET-002",
+        "name": "Impossible travel",
+        "alerts": 3,
+        "true_positive_alerts": 3,
+        "false_positive_alerts": 0,
+        "precision": 1.0,
+        "attack_events_flagged": 2,
+        "flagged_events": 5
+      },
+      {
+        "rule_id": "OT-DET-003",
+        "name": "New user agent on an existing session",
+        "alerts": 2,
+        "true_positive_alerts": 2,
+        "false_positive_alerts": 0,
+        "precision": 1.0,
+        "attack_events_flagged": 38,
+        "flagged_events": 38
+      },
+      {
+        "rule_id": "OT-DET-004",
+        "name": "Admin action without recent MFA",
+        "alerts": 1,
+        "true_positive_alerts": 1,
+        "false_positive_alerts": 0,
+        "precision": 1.0,
+        "attack_events_flagged": 5,
+        "flagged_events": 5
+      },
+      {
+        "rule_id": "OT-DET-005",
+        "name": "Bulk support-case access",
+        "alerts": 1,
+        "true_positive_alerts": 1,
+        "false_positive_alerts": 0,
+        "precision": 1.0,
+        "attack_events_flagged": 30,
+        "flagged_events": 30
+      },
+      {
+        "rule_id": "OT-DET-006",
+        "name": "Off-hours admin action",
+        "alerts": 2,
+        "true_positive_alerts": 1,
+        "false_positive_alerts": 1,
+        "precision": 0.5,
+        "attack_events_flagged": 5,
+        "flagged_events": 8
+      },
+      {
+        "rule_id": "OT-DET-007",
+        "name": "Service account from a new network",
+        "alerts": 1,
+        "true_positive_alerts": 1,
+        "false_positive_alerts": 0,
+        "precision": 1.0,
+        "attack_events_flagged": 13,
+        "flagged_events": 13
+      }
+    ],
+    "false_positive_scenarios": {
+      "offhours_admin": 1,
+      "vpn_switch": 1
+    },
+    "missed_attack_steps": []
+  }
+}
