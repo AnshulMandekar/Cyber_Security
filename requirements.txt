@@ -5,7 +5,8 @@ uvicorn[standard]>=0.29
 pydantic>=2.6
 python-multipart>=0.0.9
 
-# Optional: Module 6 LLM summaries (the offline template works without it)
+# Module 6 LLM summaries. The app runs without it (the offline template is used),
+# but the test suite imports it, so install it to run the tests.
 anthropic>=1.0
 
 # Tests
