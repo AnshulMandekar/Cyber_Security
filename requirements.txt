@@ -1,0 +1,13 @@
+# OktaTrace backend - Python 3.11+
+# Runtime
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+python-multipart>=0.0.9
+
+# Optional: Module 6 LLM summaries (the offline template works without it)
+anthropic>=1.0
+
+# Tests
+pytest>=8.0
+httpx>=0.27

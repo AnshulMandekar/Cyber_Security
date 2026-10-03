@@ -1,0 +1,10 @@
+[project]
+name = "oktatrace"
+version = "0.1.0"
+description = "Defensive forensic demo for the 2023 Okta support-system breach (synthetic data only)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["backend"]
+testpaths = ["backend/tests"]
+addopts = "-q"
