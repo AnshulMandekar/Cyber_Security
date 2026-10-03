@@ -1,0 +1,4442 @@
+{
+  "scope": "incident",
+  "entries": [
+    {
+      "id": "TL-0001",
+      "timestamp": "2023-10-02T14:30:00Z",
+      "kind": "har_capture",
+      "title": "HAR captured: support_case_00421.har",
+      "description": "Browser capture of 12 requests containing 16 secrets (6 critical, 6 high), later attached to support case CASE-00421.",
+      "actor": null,
+      "source_ip": null,
+      "session_fingerprint": null,
+      "severity": "critical",
+      "suspicious": false,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "har_file",
+          "ref": "support_case_00421.har",
+          "note": ""
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-001",
+          "note": "password"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-002",
+          "note": "client_secret"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-003",
+          "note": "session_cookie"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-004",
+          "note": "api_token"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-005",
+          "note": "access_token"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-006",
+          "note": "refresh_token"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-007",
+          "note": "access_token"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-008",
+          "note": "basic_credentials"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-009",
+          "note": "session_token"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-010",
+          "note": "session_cookie"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-011",
+          "note": "session_cookie"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-012",
+          "note": "id_token"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-013",
+          "note": "device_token"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-014",
+          "note": "oauth_code"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-015",
+          "note": "csrf_token"
+        },
+        {
+          "type": "har_finding",
+          "ref": "HAR-016",
+          "note": "jwt"
+        }
+      ],
+      "related_alerts": [],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0002",
+      "timestamp": "2023-10-02T14:30:00Z",
+      "kind": "har_finding",
+      "title": "HAR-013: device token 'DT' exposed in HAR",
+      "description": "Fingerprint 7b305ba6d2d2, risk 55/100. Its SHA-256 matches the dtHash on 40 flagged events from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco), 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main): the device cookie was replayed too, so cookie-based device trust would not have stopped the attacker.",
+      "actor": null,
+      "source_ip": null,
+      "session_fingerprint": null,
+      "severity": "medium",
+      "suspicious": true,
+      "stage": "Credential Access",
+      "mitre": [
+        {
+          "technique_id": "T1539",
+          "name": "Steal Web Session Cookie",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1539/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "har_finding",
+          "ref": "HAR-013",
+          "note": ""
+        },
+        {
+          "type": "har_file",
+          "ref": "support_case_00421.har",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0006",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0011",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0012",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0013",
+          "note": "reappears in"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0006",
+        "ALR-0007",
+        "ALR-0008",
+        "ALR-0009",
+        "ALR-0010",
+        "ALR-0011",
+        "ALR-0012",
+        "ALR-0013"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0003",
+      "timestamp": "2023-10-02T14:30:00.600000Z",
+      "kind": "event",
+      "title": "User login to Okta",
+      "description": "jordan.rivera@acme.example from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) using CHROME on Mac OS X; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "192.0.2.11",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": null,
+      "suspicious": false,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "32eb3d06-2bfe-430d-90fd-56ead80d73a6",
+          "note": ""
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0009",
+        "ALR-0010"
+      ],
+      "event_uuid": "32eb3d06-2bfe-430d-90fd-56ead80d73a6"
+    },
+    {
+      "id": "TL-0004",
+      "timestamp": "2023-10-02T14:30:01Z",
+      "kind": "har_finding",
+      "title": "HAR-011: session cookie 'sid' exposed in HAR",
+      "description": "Fingerprint c85dd9d19760, risk 60/100. Same fingerprint as the session in ALR-0005, ALR-0006, ALR-0007, ALR-0008, ALR-0009, ALR-0010, ALR-0011, ALR-0012.",
+      "actor": null,
+      "source_ip": null,
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Credential Access",
+      "mitre": [
+        {
+          "technique_id": "T1539",
+          "name": "Steal Web Session Cookie",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1539/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "har_finding",
+          "ref": "HAR-011",
+          "note": ""
+        },
+        {
+          "type": "har_file",
+          "ref": "support_case_00421.har",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0006",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0011",
+          "note": "reappears in"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0012",
+          "note": "reappears in"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0006",
+        "ALR-0007",
+        "ALR-0008",
+        "ALR-0009",
+        "ALR-0010",
+        "ALR-0011",
+        "ALR-0012"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0005",
+      "timestamp": "2023-10-02T14:44:58Z",
+      "kind": "event",
+      "title": "Create support case: CASE-00421",
+      "description": "jordan.rivera@acme.example from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) using CHROME on Mac OS X; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "192.0.2.11",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": null,
+      "suspicious": false,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "7b12503f-9008-4d1a-aa13-7910370f6e03",
+          "note": ""
+        }
+      ],
+      "related_alerts": [],
+      "event_uuid": "7b12503f-9008-4d1a-aa13-7910370f6e03"
+    },
+    {
+      "id": "TL-0006",
+      "timestamp": "2023-10-02T14:46:05Z",
+      "kind": "event",
+      "title": "Upload support case attachment: support_case_00421.har",
+      "description": "jordan.rivera@acme.example from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) using CHROME on Mac OS X; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "192.0.2.11",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": null,
+      "suspicious": false,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "86bcadae-165d-4926-be18-d2ffd198b7b6",
+          "note": ""
+        }
+      ],
+      "related_alerts": [],
+      "event_uuid": "86bcadae-165d-4926-be18-d2ffd198b7b6"
+    },
+    {
+      "id": "TL-0007",
+      "timestamp": "2023-10-02T17:20:40Z",
+      "kind": "event",
+      "title": "Authentication of user via MFA",
+      "description": "jordan.rivera@acme.example from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) using CHROME on Mac OS X; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "192.0.2.11",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": null,
+      "suspicious": false,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "d9cac2fd-224b-4255-8de4-6c6618e4a309",
+          "note": ""
+        }
+      ],
+      "related_alerts": [
+        "ALR-0011"
+      ],
+      "event_uuid": "d9cac2fd-224b-4255-8de4-6c6618e4a309"
+    },
+    {
+      "id": "TL-0008",
+      "timestamp": "2023-10-02T19:05:56.788000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00231",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.15 (AS64800 Vendor Cloud DC, Ashburn) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.15",
+      "session_fingerprint": "6de812eebcc6",
+      "severity": null,
+      "suspicious": false,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "118ef43f-7a37-4e19-bb0e-f36db3d8918e",
+          "note": ""
+        }
+      ],
+      "related_alerts": [
+        "ALR-0003"
+      ],
+      "event_uuid": "118ef43f-7a37-4e19-bb0e-f36db3d8918e"
+    },
+    {
+      "id": "TL-0009",
+      "timestamp": "2023-10-02T19:52:07Z",
+      "kind": "event",
+      "title": "User login to Okta",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Initial Access",
+      "mitre": [
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "1ab70dc5-7b2e-4877-a14b-96b5c51d2bda",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0003",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0003",
+        "ALR-0004"
+      ],
+      "event_uuid": "1ab70dc5-7b2e-4877-a14b-96b5c51d2bda"
+    },
+    {
+      "id": "TL-0010",
+      "timestamp": "2023-10-02T19:52:07Z",
+      "kind": "alert",
+      "title": "OT-DET-002 Impossible travel",
+      "description": "svc-case-sync@support.vendor.example was seen in Frankfurt am Main 46m10s after Ashburn: 6,549 km, an implied 8,511 km/h (limit 900 km/h). 2 matches from 2023-10-02 19:52 to 20:06 UTC were merged into this alert.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Initial Access",
+      "mitre": [
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0003",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "1ab70dc5-7b2e-4877-a14b-96b5c51d2bda",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "126e14dc-e53e-4123-936d-8dad8ee37cde",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0003"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0011",
+      "timestamp": "2023-10-02T19:52:07Z",
+      "kind": "alert",
+      "title": "OT-DET-007 Service account from a new network",
+      "description": "Service account svc-case-sync@support.vendor.example signed in from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main), outside the networks seen in its first 24h (AS64800). 13 matches from 2023-10-02 19:52 to 19:57 UTC were merged into this alert.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Initial Access",
+      "mitre": [
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "1ab70dc5-7b2e-4877-a14b-96b5c51d2bda",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "22c00349-afa2-4525-8671-4e9729f92378",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "d9d723f0-5c06-43c3-b9d6-d8300ce47185",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "beaa6512-b389-4971-a38a-b453561083b7",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "552d12fc-ae13-4959-8cc0-a2ceb8af0003",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "95262cd0-254c-4999-ba41-33e4ab75061b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "7e3a2fb7-2943-425b-b289-15c30d6276c2",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "beb911c4-6942-4e42-92b5-f938b39bd74b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "a826092e-64b6-4bde-b576-bedf9e4701a0",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "d6a8f510-871a-4eda-8c43-00a80af1f03b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "a50ea3e4-20fb-46f2-831c-ff5a7ecd3fdd",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "1c32df63-0fc4-4d76-8733-523f0383290a",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "801fab14-4e02-4aa6-b433-ac316c8fa094",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0012",
+      "timestamp": "2023-10-02T19:53:30Z",
+      "kind": "event",
+      "title": "View support case: CASE-00421",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "22c00349-afa2-4525-8671-4e9729f92378",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "22c00349-afa2-4525-8671-4e9729f92378"
+    },
+    {
+      "id": "TL-0013",
+      "timestamp": "2023-10-02T19:53:41Z",
+      "kind": "event",
+      "title": "Download support case attachment: support_case_00421.har",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1552.001",
+          "name": "Unsecured Credentials: Credentials In Files",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1552/001/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "d9d723f0-5c06-43c3-b9d6-d8300ce47185",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "d9d723f0-5c06-43c3-b9d6-d8300ce47185"
+    },
+    {
+      "id": "TL-0014",
+      "timestamp": "2023-10-02T19:53:41Z",
+      "kind": "inference",
+      "title": "'sid' cookie extracted from support_case_00421.har (inferred)",
+      "description": "No log records this step. The 'sid' value in support_case_00421.har (HAR-011, fingerprint c85dd9d19760) is the session replayed in ALR-0005, so it must have been extracted after svc-case-sync@support.vendor.example downloaded the file at 2023-10-02 19:53:41 UTC from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main).",
+      "actor": null,
+      "source_ip": null,
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Credential Access",
+      "mitre": [
+        {
+          "technique_id": "T1539",
+          "name": "Steal Web Session Cookie",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1539/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "har_finding",
+          "ref": "HAR-011",
+          "note": "fingerprint c85dd9d19760"
+        },
+        {
+          "type": "event",
+          "ref": "d9d723f0-5c06-43c3-b9d6-d8300ce47185",
+          "note": "HAR downloaded"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "session replayed"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0006",
+          "note": "session replayed"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "session replayed"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "session replayed"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": "session replayed"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": "session replayed"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0011",
+          "note": "session replayed"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0012",
+          "note": "session replayed"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0006",
+        "ALR-0007",
+        "ALR-0008",
+        "ALR-0009",
+        "ALR-0010",
+        "ALR-0011",
+        "ALR-0012"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0015",
+      "timestamp": "2023-10-02T19:54:22.729000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00434",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "beaa6512-b389-4971-a38a-b453561083b7",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "beaa6512-b389-4971-a38a-b453561083b7"
+    },
+    {
+      "id": "TL-0016",
+      "timestamp": "2023-10-02T19:54:33.729000Z",
+      "kind": "event",
+      "title": "Download support case attachment: case-00434_browser.har",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1552.001",
+          "name": "Unsecured Credentials: Credentials In Files",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1552/001/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "552d12fc-ae13-4959-8cc0-a2ceb8af0003",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "552d12fc-ae13-4959-8cc0-a2ceb8af0003"
+    },
+    {
+      "id": "TL-0017",
+      "timestamp": "2023-10-02T19:55:07.848000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00412",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "95262cd0-254c-4999-ba41-33e4ab75061b",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "95262cd0-254c-4999-ba41-33e4ab75061b"
+    },
+    {
+      "id": "TL-0018",
+      "timestamp": "2023-10-02T19:55:18.848000Z",
+      "kind": "event",
+      "title": "Download support case attachment: case-00412_browser.har",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1552.001",
+          "name": "Unsecured Credentials: Credentials In Files",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1552/001/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "7e3a2fb7-2943-425b-b289-15c30d6276c2",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "7e3a2fb7-2943-425b-b289-15c30d6276c2"
+    },
+    {
+      "id": "TL-0019",
+      "timestamp": "2023-10-02T19:55:48.518000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00387",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "beb911c4-6942-4e42-92b5-f938b39bd74b",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "beb911c4-6942-4e42-92b5-f938b39bd74b"
+    },
+    {
+      "id": "TL-0020",
+      "timestamp": "2023-10-02T19:55:59.518000Z",
+      "kind": "event",
+      "title": "Download support case attachment: case-00387_browser.har",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1552.001",
+          "name": "Unsecured Credentials: Credentials In Files",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1552/001/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "a826092e-64b6-4bde-b576-bedf9e4701a0",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "a826092e-64b6-4bde-b576-bedf9e4701a0"
+    },
+    {
+      "id": "TL-0021",
+      "timestamp": "2023-10-02T19:56:37.068000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00357",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "d6a8f510-871a-4eda-8c43-00a80af1f03b",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "d6a8f510-871a-4eda-8c43-00a80af1f03b"
+    },
+    {
+      "id": "TL-0022",
+      "timestamp": "2023-10-02T19:56:48.068000Z",
+      "kind": "event",
+      "title": "Download support case attachment: case-00357_browser.har",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1552.001",
+          "name": "Unsecured Credentials: Credentials In Files",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1552/001/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "a50ea3e4-20fb-46f2-831c-ff5a7ecd3fdd",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "a50ea3e4-20fb-46f2-831c-ff5a7ecd3fdd"
+    },
+    {
+      "id": "TL-0023",
+      "timestamp": "2023-10-02T19:57:30.135000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00317",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "1c32df63-0fc4-4d76-8733-523f0383290a",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004"
+      ],
+      "event_uuid": "1c32df63-0fc4-4d76-8733-523f0383290a"
+    },
+    {
+      "id": "TL-0024",
+      "timestamp": "2023-10-02T19:57:41.135000Z",
+      "kind": "event",
+      "title": "Download support case attachment: case-00317_browser.har",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.207 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using UNKNOWN on Unknown; outcome SUCCESS.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.207",
+      "session_fingerprint": "7534908f0dd6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1552.001",
+          "name": "Unsecured Credentials: Credentials In Files",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1552/001/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "801fab14-4e02-4aa6-b433-ac316c8fa094",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0004",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0004",
+        "ALR-0003"
+      ],
+      "event_uuid": "801fab14-4e02-4aa6-b433-ac316c8fa094"
+    },
+    {
+      "id": "TL-0025",
+      "timestamp": "2023-10-02T20:06:01.222000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00140",
+      "description": "svc-case-sync@support.vendor.example from 203.0.113.15 (AS64800 Vendor Cloud DC, Ashburn) using UNKNOWN on Unknown; outcome SUCCESS. Not on the attacker's network: likely the genuine user's side of the travel pair.",
+      "actor": "svc-case-sync@support.vendor.example",
+      "source_ip": "203.0.113.15",
+      "session_fingerprint": "6de812eebcc6",
+      "severity": "high",
+      "suspicious": true,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "126e14dc-e53e-4123-936d-8dad8ee37cde",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0003",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0003"
+      ],
+      "event_uuid": "126e14dc-e53e-4123-936d-8dad8ee37cde"
+    },
+    {
+      "id": "TL-0026",
+      "timestamp": "2023-10-02T21:58:30Z",
+      "kind": "event",
+      "title": "User single sign on to app: Jira",
+      "description": "jordan.rivera@acme.example from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) using CHROME on Mac OS X; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "192.0.2.11",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": null,
+      "suspicious": false,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "5d1b8c75-3898-402c-8f78-e78c843a763d",
+          "note": ""
+        }
+      ],
+      "related_alerts": [
+        "ALR-0006"
+      ],
+      "event_uuid": "5d1b8c75-3898-402c-8f78-e78c843a763d"
+    },
+    {
+      "id": "TL-0027",
+      "timestamp": "2023-10-02T22:04:10Z",
+      "kind": "event",
+      "title": "User single sign on to app: Okta Admin Console",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Lateral Movement",
+      "mitre": [
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        },
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "eb34874a-d922-4cdc-a7ab-4c836ba54254",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0006",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0006",
+        "ALR-0007"
+      ],
+      "event_uuid": "eb34874a-d922-4cdc-a7ab-4c836ba54254"
+    },
+    {
+      "id": "TL-0028",
+      "timestamp": "2023-10-02T22:04:10Z",
+      "kind": "alert",
+      "title": "OT-DET-001 Session token reused from another IP",
+      "description": "session c85dd9d19760 for jordan.rivera@acme.example was established from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) but was used from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) 7h34m later, without a new sign-in. 32 matches from 2023-10-02 22:04 to 22:12 UTC were merged into this alert.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Lateral Movement",
+      "mitre": [
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        },
+        {
+          "technique_id": "T1539",
+          "name": "Steal Web Session Cookie",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1539/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "eb34874a-d922-4cdc-a7ab-4c836ba54254",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "d5b564ba-17ba-426f-bb58-e461e2c55a30",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "e60f137b-e12a-4235-a0d2-5116347912c8",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "26b68970-de04-4dcc-96f3-02cc8915c77e",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "09d36cdd-f72a-4d39-b0e6-4b5b697f8f5e",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "5c09484d-26e6-4189-97db-b5a7843c18e8",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "0fcf084a-f239-4e47-923d-df0350aacd8c",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "1d9ea2ae-1ae5-42d8-90d4-dd53433e6489",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "c4e0d8fa-d522-4aa9-9369-70cc56ba9728",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "c08c512f-7dc4-41fd-9a14-f8ac80d51ac8",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "f4f4ffe2-c5e0-48fe-b09f-689994484cdd",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "3457296f-4791-4c2f-bd5b-4acd59469954",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "5c9e6c5e-05cb-4069-9fb2-ff44b26652b2",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "b4615997-b9ac-4de7-8ea6-32db2857cfb9",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "deecb7eb-8dba-4bae-a652-fe4bfa7fa855",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "0265248e-4bde-40cb-9afa-266c6cf324d7",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "dd5d7414-1818-4c8f-b9fc-b620ea1fd27b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "a39a8461-9346-4d89-b8d4-74ab6cc87589",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "6a2c4b67-386b-4b14-b95b-792ec9cd03b6",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "627e610e-b51a-4c53-8355-f10c81af3cbc",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "10acaa9d-93a0-4e29-98d8-22cf92268885",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "f1582f42-65fd-4361-9678-4ae270d86ef6",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "20e2c44d-ed3a-403a-87e0-2ca836146799",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "2b19e654-ea69-4473-b4af-16823e3ca777",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "c9266f9e-85f1-4027-8929-b9df4c2e8bdb",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "40400256-3590-440b-b35c-c04b6901e123",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "d0d59100-4289-43bd-82c5-3dfee4ebf0b4",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "6ca72a36-cf97-4876-b994-a8a1838e610b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "781c3274-c5c3-4815-8d1b-201251bca21d",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "0424b92a-1aea-454b-86a3-05fb1a1a5db1",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "f74fb801-2f24-432f-8d17-5215e0ceb351",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "221c53e1-0dbf-4042-aac9-a1a4aedfc454",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0029",
+      "timestamp": "2023-10-02T22:04:10Z",
+      "kind": "alert",
+      "title": "OT-DET-002 Impossible travel",
+      "description": "jordan.rivera@acme.example was seen in Frankfurt am Main 5m40s after San Francisco: 9,133 km, an implied 96,707 km/h (limit 900 km/h). 2 matches from 2023-10-02 22:04 to 22:13 UTC were merged into this alert.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Initial Access",
+      "mitre": [
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0006",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "eb34874a-d922-4cdc-a7ab-4c836ba54254",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "780e819e-2ff5-4679-aa5f-9755db3227c6",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0006"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0030",
+      "timestamp": "2023-10-02T22:04:10Z",
+      "kind": "alert",
+      "title": "OT-DET-003 New user agent on an existing session",
+      "description": "session c85dd9d19760 for jordan.rivera@acme.example started in CHROME on Mac OS X but continued in FIREFOX on Windows 10. 32 matches from 2023-10-02 22:04 to 22:12 UTC were merged into this alert.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "medium",
+      "suspicious": true,
+      "stage": "Lateral Movement",
+      "mitre": [
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "eb34874a-d922-4cdc-a7ab-4c836ba54254",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "d5b564ba-17ba-426f-bb58-e461e2c55a30",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "e60f137b-e12a-4235-a0d2-5116347912c8",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "26b68970-de04-4dcc-96f3-02cc8915c77e",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "09d36cdd-f72a-4d39-b0e6-4b5b697f8f5e",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "5c09484d-26e6-4189-97db-b5a7843c18e8",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "0fcf084a-f239-4e47-923d-df0350aacd8c",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "1d9ea2ae-1ae5-42d8-90d4-dd53433e6489",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "c4e0d8fa-d522-4aa9-9369-70cc56ba9728",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "c08c512f-7dc4-41fd-9a14-f8ac80d51ac8",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "f4f4ffe2-c5e0-48fe-b09f-689994484cdd",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "3457296f-4791-4c2f-bd5b-4acd59469954",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "5c9e6c5e-05cb-4069-9fb2-ff44b26652b2",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "b4615997-b9ac-4de7-8ea6-32db2857cfb9",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "deecb7eb-8dba-4bae-a652-fe4bfa7fa855",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "0265248e-4bde-40cb-9afa-266c6cf324d7",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "dd5d7414-1818-4c8f-b9fc-b620ea1fd27b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "a39a8461-9346-4d89-b8d4-74ab6cc87589",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "6a2c4b67-386b-4b14-b95b-792ec9cd03b6",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "627e610e-b51a-4c53-8355-f10c81af3cbc",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "10acaa9d-93a0-4e29-98d8-22cf92268885",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "f1582f42-65fd-4361-9678-4ae270d86ef6",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "20e2c44d-ed3a-403a-87e0-2ca836146799",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "2b19e654-ea69-4473-b4af-16823e3ca777",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "c9266f9e-85f1-4027-8929-b9df4c2e8bdb",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "40400256-3590-440b-b35c-c04b6901e123",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "d0d59100-4289-43bd-82c5-3dfee4ebf0b4",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "6ca72a36-cf97-4876-b994-a8a1838e610b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "781c3274-c5c3-4815-8d1b-201251bca21d",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "0424b92a-1aea-454b-86a3-05fb1a1a5db1",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "f74fb801-2f24-432f-8d17-5215e0ceb351",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "221c53e1-0dbf-4042-aac9-a1a4aedfc454",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0007"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0031",
+      "timestamp": "2023-10-02T22:04:35Z",
+      "kind": "event",
+      "title": "User single sign on to app: Vendor Support Portal",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Lateral Movement",
+      "mitre": [
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "d5b564ba-17ba-426f-bb58-e461e2c55a30",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007"
+      ],
+      "event_uuid": "d5b564ba-17ba-426f-bb58-e461e2c55a30"
+    },
+    {
+      "id": "TL-0032",
+      "timestamp": "2023-10-02T22:05:00.437000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00205",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "e60f137b-e12a-4235-a0d2-5116347912c8",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "e60f137b-e12a-4235-a0d2-5116347912c8"
+    },
+    {
+      "id": "TL-0033",
+      "timestamp": "2023-10-02T22:05:17.573000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00054",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "26b68970-de04-4dcc-96f3-02cc8915c77e",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "26b68970-de04-4dcc-96f3-02cc8915c77e"
+    },
+    {
+      "id": "TL-0034",
+      "timestamp": "2023-10-02T22:05:32.590000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00299",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "09d36cdd-f72a-4d39-b0e6-4b5b697f8f5e",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "09d36cdd-f72a-4d39-b0e6-4b5b697f8f5e"
+    },
+    {
+      "id": "TL-0035",
+      "timestamp": "2023-10-02T22:05:46.630000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00456",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "5c09484d-26e6-4189-97db-b5a7843c18e8",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "5c09484d-26e6-4189-97db-b5a7843c18e8"
+    },
+    {
+      "id": "TL-0036",
+      "timestamp": "2023-10-02T22:06:00.510000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00370",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "0fcf084a-f239-4e47-923d-df0350aacd8c",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "0fcf084a-f239-4e47-923d-df0350aacd8c"
+    },
+    {
+      "id": "TL-0037",
+      "timestamp": "2023-10-02T22:06:15.921000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00139",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "1d9ea2ae-1ae5-42d8-90d4-dd53433e6489",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "1d9ea2ae-1ae5-42d8-90d4-dd53433e6489"
+    },
+    {
+      "id": "TL-0038",
+      "timestamp": "2023-10-02T22:06:31.402000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00403",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "c4e0d8fa-d522-4aa9-9369-70cc56ba9728",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "c4e0d8fa-d522-4aa9-9369-70cc56ba9728"
+    },
+    {
+      "id": "TL-0039",
+      "timestamp": "2023-10-02T22:06:45.964000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00452",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "c08c512f-7dc4-41fd-9a14-f8ac80d51ac8",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "c08c512f-7dc4-41fd-9a14-f8ac80d51ac8"
+    },
+    {
+      "id": "TL-0040",
+      "timestamp": "2023-10-02T22:07:00.976000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00111",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "f4f4ffe2-c5e0-48fe-b09f-689994484cdd",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "f4f4ffe2-c5e0-48fe-b09f-689994484cdd"
+    },
+    {
+      "id": "TL-0041",
+      "timestamp": "2023-10-02T22:07:16.915000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00275",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "3457296f-4791-4c2f-bd5b-4acd59469954",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "3457296f-4791-4c2f-bd5b-4acd59469954"
+    },
+    {
+      "id": "TL-0042",
+      "timestamp": "2023-10-02T22:07:32.195000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00257",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "5c9e6c5e-05cb-4069-9fb2-ff44b26652b2",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "5c9e6c5e-05cb-4069-9fb2-ff44b26652b2"
+    },
+    {
+      "id": "TL-0043",
+      "timestamp": "2023-10-02T22:07:46.712000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00230",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "b4615997-b9ac-4de7-8ea6-32db2857cfb9",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "b4615997-b9ac-4de7-8ea6-32db2857cfb9"
+    },
+    {
+      "id": "TL-0044",
+      "timestamp": "2023-10-02T22:08:00.080000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00198",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "deecb7eb-8dba-4bae-a652-fe4bfa7fa855",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "deecb7eb-8dba-4bae-a652-fe4bfa7fa855"
+    },
+    {
+      "id": "TL-0045",
+      "timestamp": "2023-10-02T22:08:15.627000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00407",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "0265248e-4bde-40cb-9afa-266c6cf324d7",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "0265248e-4bde-40cb-9afa-266c6cf324d7"
+    },
+    {
+      "id": "TL-0046",
+      "timestamp": "2023-10-02T22:08:32.772000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00079",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "dd5d7414-1818-4c8f-b9fc-b620ea1fd27b",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "dd5d7414-1818-4c8f-b9fc-b620ea1fd27b"
+    },
+    {
+      "id": "TL-0047",
+      "timestamp": "2023-10-02T22:08:32.772000Z",
+      "kind": "alert",
+      "title": "OT-DET-005 Bulk support-case access",
+      "description": "jordan.rivera@acme.example viewed 15 distinct support cases within 10 minutes (threshold 15). 16 matches from 2023-10-02 22:08 to 22:12 UTC were merged into this alert.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "medium",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "e60f137b-e12a-4235-a0d2-5116347912c8",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "26b68970-de04-4dcc-96f3-02cc8915c77e",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "09d36cdd-f72a-4d39-b0e6-4b5b697f8f5e",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "5c09484d-26e6-4189-97db-b5a7843c18e8",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "0fcf084a-f239-4e47-923d-df0350aacd8c",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "1d9ea2ae-1ae5-42d8-90d4-dd53433e6489",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "c4e0d8fa-d522-4aa9-9369-70cc56ba9728",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "c08c512f-7dc4-41fd-9a14-f8ac80d51ac8",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "f4f4ffe2-c5e0-48fe-b09f-689994484cdd",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "3457296f-4791-4c2f-bd5b-4acd59469954",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "5c9e6c5e-05cb-4069-9fb2-ff44b26652b2",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "b4615997-b9ac-4de7-8ea6-32db2857cfb9",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "deecb7eb-8dba-4bae-a652-fe4bfa7fa855",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "0265248e-4bde-40cb-9afa-266c6cf324d7",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "dd5d7414-1818-4c8f-b9fc-b620ea1fd27b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "a39a8461-9346-4d89-b8d4-74ab6cc87589",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "6a2c4b67-386b-4b14-b95b-792ec9cd03b6",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "627e610e-b51a-4c53-8355-f10c81af3cbc",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "10acaa9d-93a0-4e29-98d8-22cf92268885",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "f1582f42-65fd-4361-9678-4ae270d86ef6",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "20e2c44d-ed3a-403a-87e0-2ca836146799",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "2b19e654-ea69-4473-b4af-16823e3ca777",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "c9266f9e-85f1-4027-8929-b9df4c2e8bdb",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "40400256-3590-440b-b35c-c04b6901e123",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "d0d59100-4289-43bd-82c5-3dfee4ebf0b4",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "6ca72a36-cf97-4876-b994-a8a1838e610b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "781c3274-c5c3-4815-8d1b-201251bca21d",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "0424b92a-1aea-454b-86a3-05fb1a1a5db1",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "f74fb801-2f24-432f-8d17-5215e0ceb351",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "221c53e1-0dbf-4042-aac9-a1a4aedfc454",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0008"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0048",
+      "timestamp": "2023-10-02T22:08:46.600000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00112",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "a39a8461-9346-4d89-b8d4-74ab6cc87589",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "a39a8461-9346-4d89-b8d4-74ab6cc87589"
+    },
+    {
+      "id": "TL-0049",
+      "timestamp": "2023-10-02T22:09:02.619000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00310",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "6a2c4b67-386b-4b14-b95b-792ec9cd03b6",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "6a2c4b67-386b-4b14-b95b-792ec9cd03b6"
+    },
+    {
+      "id": "TL-0050",
+      "timestamp": "2023-10-02T22:09:16.666000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00459",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "627e610e-b51a-4c53-8355-f10c81af3cbc",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "627e610e-b51a-4c53-8355-f10c81af3cbc"
+    },
+    {
+      "id": "TL-0051",
+      "timestamp": "2023-10-02T22:09:32.141000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00177",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "10acaa9d-93a0-4e29-98d8-22cf92268885",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "10acaa9d-93a0-4e29-98d8-22cf92268885"
+    },
+    {
+      "id": "TL-0052",
+      "timestamp": "2023-10-02T22:09:47.460000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00314",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "f1582f42-65fd-4361-9678-4ae270d86ef6",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "f1582f42-65fd-4361-9678-4ae270d86ef6"
+    },
+    {
+      "id": "TL-0053",
+      "timestamp": "2023-10-02T22:10:00.506000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00106",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "20e2c44d-ed3a-403a-87e0-2ca836146799",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "20e2c44d-ed3a-403a-87e0-2ca836146799"
+    },
+    {
+      "id": "TL-0054",
+      "timestamp": "2023-10-02T22:10:15.258000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00378",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "2b19e654-ea69-4473-b4af-16823e3ca777",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "2b19e654-ea69-4473-b4af-16823e3ca777"
+    },
+    {
+      "id": "TL-0055",
+      "timestamp": "2023-10-02T22:10:31.081000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00200",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "c9266f9e-85f1-4027-8929-b9df4c2e8bdb",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "c9266f9e-85f1-4027-8929-b9df4c2e8bdb"
+    },
+    {
+      "id": "TL-0056",
+      "timestamp": "2023-10-02T22:10:45.227000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00189",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "40400256-3590-440b-b35c-c04b6901e123",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "40400256-3590-440b-b35c-c04b6901e123"
+    },
+    {
+      "id": "TL-0057",
+      "timestamp": "2023-10-02T22:11:00.839000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00376",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "d0d59100-4289-43bd-82c5-3dfee4ebf0b4",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "d0d59100-4289-43bd-82c5-3dfee4ebf0b4"
+    },
+    {
+      "id": "TL-0058",
+      "timestamp": "2023-10-02T22:11:15.671000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00076",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "6ca72a36-cf97-4876-b994-a8a1838e610b",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "6ca72a36-cf97-4876-b994-a8a1838e610b"
+    },
+    {
+      "id": "TL-0059",
+      "timestamp": "2023-10-02T22:11:30.057000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00471",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "781c3274-c5c3-4815-8d1b-201251bca21d",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "781c3274-c5c3-4815-8d1b-201251bca21d"
+    },
+    {
+      "id": "TL-0060",
+      "timestamp": "2023-10-02T22:11:46.802000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00040",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "0424b92a-1aea-454b-86a3-05fb1a1a5db1",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "0424b92a-1aea-454b-86a3-05fb1a1a5db1"
+    },
+    {
+      "id": "TL-0061",
+      "timestamp": "2023-10-02T22:12:02.552000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00100",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "f74fb801-2f24-432f-8d17-5215e0ceb351",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008"
+      ],
+      "event_uuid": "f74fb801-2f24-432f-8d17-5215e0ceb351"
+    },
+    {
+      "id": "TL-0062",
+      "timestamp": "2023-10-02T22:12:17.800000Z",
+      "kind": "event",
+      "title": "View support case: CASE-00041",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Collection",
+      "mitre": [
+        {
+          "technique_id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "url": "https://attack.mitre.org/techniques/T1213/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "221c53e1-0dbf-4042-aac9-a1a4aedfc454",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0005",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0007",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0008",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0005",
+        "ALR-0007",
+        "ALR-0008",
+        "ALR-0006"
+      ],
+      "event_uuid": "221c53e1-0dbf-4042-aac9-a1a4aedfc454"
+    },
+    {
+      "id": "TL-0063",
+      "timestamp": "2023-10-02T22:13:10Z",
+      "kind": "event",
+      "title": "User single sign on to app: Slack",
+      "description": "jordan.rivera@acme.example from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) using CHROME on Mac OS X; outcome SUCCESS. Not on the attacker's network: likely the genuine user's side of the travel pair.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "192.0.2.11",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "780e819e-2ff5-4679-aa5f-9755db3227c6",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0006",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0006"
+      ],
+      "event_uuid": "780e819e-2ff5-4679-aa5f-9755db3227c6"
+    },
+    {
+      "id": "TL-0064",
+      "timestamp": "2023-10-03T09:41:12Z",
+      "kind": "event",
+      "title": "User single sign on to app: Okta Admin Console",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Lateral Movement",
+      "mitre": [
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "5e955a48-c565-4fad-b1b7-fadef0a7cf6a",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0009",
+        "ALR-0010"
+      ],
+      "event_uuid": "5e955a48-c565-4fad-b1b7-fadef0a7cf6a"
+    },
+    {
+      "id": "TL-0065",
+      "timestamp": "2023-10-03T09:41:12Z",
+      "kind": "alert",
+      "title": "OT-DET-001 Session token reused from another IP",
+      "description": "session c85dd9d19760 for jordan.rivera@acme.example was established from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) but was used from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) 19h11m later, without a new sign-in. 6 matches from 2023-10-03 09:41 to 09:44 UTC were merged into this alert.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Lateral Movement",
+      "mitre": [
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        },
+        {
+          "technique_id": "T1539",
+          "name": "Steal Web Session Cookie",
+          "tactic": "Credential Access",
+          "url": "https://attack.mitre.org/techniques/T1539/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "5e955a48-c565-4fad-b1b7-fadef0a7cf6a",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "dc71a62e-1a1d-4e2f-8e60-83ea82504078",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "4845f5ff-afa4-4b2f-9644-516fa6f94e55",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "ae91650a-7ac0-4852-9f24-ee2a0d29f347",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0009"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0066",
+      "timestamp": "2023-10-03T09:41:12Z",
+      "kind": "alert",
+      "title": "OT-DET-003 New user agent on an existing session",
+      "description": "session c85dd9d19760 for jordan.rivera@acme.example started in CHROME on Mac OS X but continued in FIREFOX on Windows 10. 6 matches from 2023-10-03 09:41 to 09:44 UTC were merged into this alert.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "medium",
+      "suspicious": true,
+      "stage": "Lateral Movement",
+      "mitre": [
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "5e955a48-c565-4fad-b1b7-fadef0a7cf6a",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "dc71a62e-1a1d-4e2f-8e60-83ea82504078",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "4845f5ff-afa4-4b2f-9644-516fa6f94e55",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "ae91650a-7ac0-4852-9f24-ee2a0d29f347",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0010"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0067",
+      "timestamp": "2023-10-03T09:42:03Z",
+      "kind": "event",
+      "title": "Create Okta user: it-helpdesk-svc@acme.example",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Persistence",
+      "mitre": [
+        {
+          "technique_id": "T1136.003",
+          "name": "Create Account: Cloud Account",
+          "tactic": "Persistence",
+          "url": "https://attack.mitre.org/techniques/T1136/003/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0011",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0012",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0009",
+        "ALR-0010",
+        "ALR-0011",
+        "ALR-0012"
+      ],
+      "event_uuid": "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05"
+    },
+    {
+      "id": "TL-0068",
+      "timestamp": "2023-10-03T09:42:03Z",
+      "kind": "alert",
+      "title": "OT-DET-004 Admin action without recent MFA",
+      "description": "user.lifecycle.create by jordan.rivera@acme.example on session c85dd9d19760: the last MFA was 16h21m earlier (limit 60 min). 5 matches from 2023-10-03 09:42 to 09:44 UTC were merged into this alert.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Persistence",
+      "mitre": [
+        {
+          "technique_id": "T1098",
+          "name": "Account Manipulation",
+          "tactic": "Persistence",
+          "url": "https://attack.mitre.org/techniques/T1098/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0011",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "dc71a62e-1a1d-4e2f-8e60-83ea82504078",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "4845f5ff-afa4-4b2f-9644-516fa6f94e55",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "ae91650a-7ac0-4852-9f24-ee2a0d29f347",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0011"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0069",
+      "timestamp": "2023-10-03T09:42:03Z",
+      "kind": "alert",
+      "title": "OT-DET-006 Off-hours admin action",
+      "description": "user.lifecycle.create by jordan.rivera@acme.example at Tue 02:42 local time (UTC-7), outside business hours (07:00-20:00, Mon-Fri). 5 matches from 2023-10-03 09:42 to 09:44 UTC were merged into this alert.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "medium",
+      "suspicious": true,
+      "stage": "Initial Access",
+      "mitre": [
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0012",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "5f3ca92a-ff5a-4191-91a6-a8c1c415ee05",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "dc71a62e-1a1d-4e2f-8e60-83ea82504078",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "4845f5ff-afa4-4b2f-9644-516fa6f94e55",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b",
+          "note": "flagged"
+        },
+        {
+          "type": "event",
+          "ref": "ae91650a-7ac0-4852-9f24-ee2a0d29f347",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0012"
+      ],
+      "event_uuid": null
+    },
+    {
+      "id": "TL-0070",
+      "timestamp": "2023-10-03T09:42:44.946000Z",
+      "kind": "event",
+      "title": "Add user to group membership: Acme-Super-Admins",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Persistence",
+      "mitre": [
+        {
+          "technique_id": "T1098",
+          "name": "Account Manipulation",
+          "tactic": "Persistence",
+          "url": "https://attack.mitre.org/techniques/T1098/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "dc71a62e-1a1d-4e2f-8e60-83ea82504078",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0011",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0012",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0009",
+        "ALR-0010",
+        "ALR-0011",
+        "ALR-0012"
+      ],
+      "event_uuid": "dc71a62e-1a1d-4e2f-8e60-83ea82504078"
+    },
+    {
+      "id": "TL-0071",
+      "timestamp": "2023-10-03T09:43:26.980000Z",
+      "kind": "event",
+      "title": "Create API token: sync-helper",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Persistence",
+      "mitre": [
+        {
+          "technique_id": "T1098.001",
+          "name": "Account Manipulation: Additional Cloud Credentials",
+          "tactic": "Persistence",
+          "url": "https://attack.mitre.org/techniques/T1098/001/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "4845f5ff-afa4-4b2f-9644-516fa6f94e55",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0011",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0012",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0009",
+        "ALR-0010",
+        "ALR-0011",
+        "ALR-0012"
+      ],
+      "event_uuid": "4845f5ff-afa4-4b2f-9644-516fa6f94e55"
+    },
+    {
+      "id": "TL-0072",
+      "timestamp": "2023-10-03T09:44:12.880000Z",
+      "kind": "event",
+      "title": "Reset factor for user: mei.ibrahim@acme.example",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome SUCCESS.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Defense Evasion",
+      "mitre": [
+        {
+          "technique_id": "T1556.006",
+          "name": "Modify Authentication Process: Multi-Factor Authentication",
+          "tactic": "Defense Evasion",
+          "url": "https://attack.mitre.org/techniques/T1556/006/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0011",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0012",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0009",
+        "ALR-0010",
+        "ALR-0011",
+        "ALR-0012"
+      ],
+      "event_uuid": "b077a2fb-4f53-4e96-94c9-4ae7c5d66d9b"
+    },
+    {
+      "id": "TL-0073",
+      "timestamp": "2023-10-03T09:44:59.708000Z",
+      "kind": "event",
+      "title": "Update policy rule: Default sign-on rule (FAILURE)",
+      "description": "jordan.rivera@acme.example from 203.0.113.211 (AS65066 Nightjar Hosting Ltd, Frankfurt am Main) using FIREFOX on Windows 10; outcome FAILURE (Insufficient permissions: super administrator role required).",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "203.0.113.211",
+      "session_fingerprint": "c85dd9d19760",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Defense Evasion",
+      "mitre": [
+        {
+          "technique_id": "T1484",
+          "name": "Domain or Tenant Policy Modification",
+          "tactic": "Defense Evasion",
+          "url": "https://attack.mitre.org/techniques/T1484/"
+        },
+        {
+          "technique_id": "T1550.004",
+          "name": "Use Alternate Authentication Material: Web Session Cookie",
+          "tactic": "Lateral Movement",
+          "url": "https://attack.mitre.org/techniques/T1550/004/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "ae91650a-7ac0-4852-9f24-ee2a0d29f347",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0009",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0010",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0011",
+          "note": "flagged by"
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0012",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0009",
+        "ALR-0010",
+        "ALR-0011",
+        "ALR-0012",
+        "ALR-0013"
+      ],
+      "event_uuid": "ae91650a-7ac0-4852-9f24-ee2a0d29f347"
+    },
+    {
+      "id": "TL-0074",
+      "timestamp": "2023-10-03T15:15:05.674000Z",
+      "kind": "event",
+      "title": "User login to Okta",
+      "description": "jordan.rivera@acme.example from 192.0.2.11 (AS64512 Acme Synthetic Corp, San Francisco) using CHROME on Mac OS X; outcome SUCCESS. Not on the attacker's network: likely the genuine user's side of the travel pair.",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "192.0.2.11",
+      "session_fingerprint": "6baf6f1cb59a",
+      "severity": "high",
+      "suspicious": true,
+      "stage": null,
+      "mitre": [],
+      "evidence": [
+        {
+          "type": "event",
+          "ref": "59ff14ed-d119-4fc6-84ce-ac6cacf8b0b3",
+          "note": ""
+        },
+        {
+          "type": "alert",
+          "ref": "ALR-0013",
+          "note": "flagged by"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0013"
+      ],
+      "event_uuid": "59ff14ed-d119-4fc6-84ce-ac6cacf8b0b3"
+    },
+    {
+      "id": "TL-0075",
+      "timestamp": "2023-10-03T15:15:05.674000Z",
+      "kind": "alert",
+      "title": "OT-DET-002 Impossible travel",
+      "description": "jordan.rivera@acme.example was seen in San Francisco 5h30m after Frankfurt am Main: 9,133 km, an implied 1,660 km/h (limit 900 km/h).",
+      "actor": "jordan.rivera@acme.example",
+      "source_ip": "192.0.2.11",
+      "session_fingerprint": "6baf6f1cb59a",
+      "severity": "high",
+      "suspicious": true,
+      "stage": "Initial Access",
+      "mitre": [
+        {
+          "technique_id": "T1078",
+          "name": "Valid Accounts",
+          "tactic": "Initial Access",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "alert",
+          "ref": "ALR-0013",
+          "note": ""
+        },
+        {
+          "type": "event",
+          "ref": "59ff14ed-d119-4fc6-84ce-ac6cacf8b0b3",
+          "note": "flagged"
+        }
+      ],
+      "related_alerts": [
+        "ALR-0013"
+      ],
+      "event_uuid": null
+    }
+  ],
+  "incident_alerts": [
+    "ALR-0003",
+    "ALR-0004",
+    "ALR-0005",
+    "ALR-0006",
+    "ALR-0007",
+    "ALR-0008",
+    "ALR-0009",
+    "ALR-0010",
+    "ALR-0011",
+    "ALR-0012",
+    "ALR-0013"
+  ],
+  "excluded_alerts": [
+    "ALR-0001",
+    "ALR-0002"
+  ],
+  "pivots": {
+    "matched_fingerprints": [
+      "c85dd9d19760"
+    ],
+    "actors": [
+      "jordan.rivera@acme.example"
+    ],
+    "attacker_asns": [
+      65066
+    ],
+    "note": "Seeded from alerts whose session fingerprint matches a secret in the HAR, then widened to alerts for the same actors or with suspicious events from the replay networks."
+  },
+  "mitre_summary": [
+    {
+      "technique_id": "T1539",
+      "name": "Steal Web Session Cookie",
+      "tactic": "Credential Access",
+      "entries": 5,
+      "first_seen": "2023-10-02T14:30:00Z"
+    },
+    {
+      "technique_id": "T1078",
+      "name": "Valid Accounts",
+      "tactic": "Initial Access",
+      "entries": 19,
+      "first_seen": "2023-10-02T19:52:07Z"
+    },
+    {
+      "technique_id": "T1213",
+      "name": "Data from Information Repositories",
+      "tactic": "Collection",
+      "entries": 43,
+      "first_seen": "2023-10-02T19:53:30Z"
+    },
+    {
+      "technique_id": "T1552.001",
+      "name": "Unsecured Credentials: Credentials In Files",
+      "tactic": "Credential Access",
+      "entries": 6,
+      "first_seen": "2023-10-02T19:53:41Z"
+    },
+    {
+      "technique_id": "T1550.004",
+      "name": "Use Alternate Authentication Material: Web Session Cookie",
+      "tactic": "Lateral Movement",
+      "entries": 43,
+      "first_seen": "2023-10-02T22:04:10Z"
+    },
+    {
+      "technique_id": "T1098",
+      "name": "Account Manipulation",
+      "tactic": "Persistence",
+      "entries": 2,
+      "first_seen": "2023-10-03T09:42:03Z"
+    },
+    {
+      "technique_id": "T1136.003",
+      "name": "Create Account: Cloud Account",
+      "tactic": "Persistence",
+      "entries": 1,
+      "first_seen": "2023-10-03T09:42:03Z"
+    },
+    {
+      "technique_id": "T1098.001",
+      "name": "Account Manipulation: Additional Cloud Credentials",
+      "tactic": "Persistence",
+      "entries": 1,
+      "first_seen": "2023-10-03T09:43:26.980000Z"
+    },
+    {
+      "technique_id": "T1556.006",
+      "name": "Modify Authentication Process: Multi-Factor Authentication",
+      "tactic": "Defense Evasion",
+      "entries": 1,
+      "first_seen": "2023-10-03T09:44:12.880000Z"
+    },
+    {
+      "technique_id": "T1484",
+      "name": "Domain or Tenant Policy Modification",
+      "tactic": "Defense Evasion",
+      "entries": 1,
+      "first_seen": "2023-10-03T09:44:59.708000Z"
+    }
+  ],
+  "first_timestamp": "2023-10-02T14:30:00Z",
+  "last_timestamp": "2023-10-03T15:15:05.674000Z"
+}
