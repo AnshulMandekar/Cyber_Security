@@ -1,0 +1,819 @@
+{
+  "disclaimer": "SYNTHETIC DATA ONLY - OktaTrace is an educational forensic demo. All users, tokens, IP addresses, logs and HAR files are fabricated; no real systems, credentials or customer data are involved.",
+  "summary": {
+    "creator": "OktaTrace synthetic HAR generator 0.1.0",
+    "entry_count": 12,
+    "page_count": 1,
+    "hosts": [
+      "acme-admin.idp.example",
+      "acme.idp.example",
+      "cdn.acme.example",
+      "legacy-wiki.acme.example",
+      "reports.acme.example"
+    ],
+    "first_request_at": "2023-10-02T14:30:00Z",
+    "last_request_at": "2023-10-02T14:30:30Z"
+  },
+  "stats": {
+    "total_findings": 16,
+    "by_severity": {
+      "critical": 6,
+      "high": 6,
+      "medium": 2,
+      "low": 2
+    },
+    "by_kind": {
+      "access_token": 2,
+      "api_token": 1,
+      "basic_credentials": 1,
+      "client_secret": 1,
+      "csrf_token": 1,
+      "device_token": 1,
+      "id_token": 1,
+      "jwt": 1,
+      "oauth_code": 1,
+      "password": 1,
+      "refresh_token": 1,
+      "session_cookie": 3,
+      "session_token": 1
+    },
+    "long_lived_count": 6,
+    "max_risk_score": 90,
+    "overall_severity": "critical"
+  },
+  "findings": [
+    {
+      "id": "HAR-001",
+      "kind": "password",
+      "name": "password",
+      "value_preview": "********",
+      "fingerprint": null,
+      "risk_score": 90,
+      "severity": "critical",
+      "long_lived": false,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for password",
+          "points": 90
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "entry_index": 0,
+          "location": "request.body:password",
+          "method": "POST",
+          "url": "https://acme.idp.example/api/v1/authn",
+          "timestamp": "2023-10-02T14:30:00Z"
+        }
+      ],
+      "recommendation": "Force a password reset and check for reuse. HAR captures of login flows record passwords in clear text."
+    },
+    {
+      "id": "HAR-002",
+      "kind": "client_secret",
+      "name": "client_secret",
+      "value_preview": "csSYNK...(40 chars)",
+      "fingerprint": "3102adf48586",
+      "risk_score": 90,
+      "severity": "critical",
+      "long_lived": true,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for client secret",
+          "points": 80
+        },
+        {
+          "label": "Long-lived by design (valid until revoked)",
+          "points": 10
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "entry_index": 3,
+          "location": "request.body:client_secret",
+          "method": "POST",
+          "url": "https://acme.idp.example/oauth2/v1/token",
+          "timestamp": "2023-10-02T14:30:05Z"
+        }
+      ],
+      "recommendation": "Rotate the client secret and move the client to private_key_jwt authentication."
+    },
+    {
+      "id": "HAR-003",
+      "kind": "session_cookie",
+      "name": "JSESSIONID",
+      "value_preview": "SYN5RB...(32 chars)",
+      "fingerprint": "c1b9a84ef529",
+      "risk_score": 90,
+      "severity": "critical",
+      "long_lived": true,
+      "valid_at_capture": true,
+      "expires_at": "2023-11-01T14:30:09Z",
+      "lifetime_seconds": 2592000,
+      "factors": [
+        {
+          "label": "Base score for session cookie",
+          "points": 60
+        },
+        {
+          "label": "Still valid when the HAR was captured (replayable)",
+          "points": 10
+        },
+        {
+          "label": "Long-lived: lifetime 30d exceeds 8h",
+          "points": 10
+        },
+        {
+          "label": "Cookie set without HttpOnly (readable by scripts)",
+          "points": 5
+        },
+        {
+          "label": "Cookie set without Secure (may be sent over plain HTTP)",
+          "points": 5
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "entry_index": 5,
+          "location": "response.set-cookie:JSESSIONID",
+          "method": "GET",
+          "url": "https://acme-admin.idp.example/admin/dashboard",
+          "timestamp": "2023-10-02T14:30:09Z"
+        }
+      ],
+      "recommendation": "Terminate the session server-side and treat all activity after the capture time as suspect. Strip cookies from HAR files before sharing them."
+    },
+    {
+      "id": "HAR-004",
+      "kind": "api_token",
+      "name": "Authorization",
+      "value_preview": "00SYNN...(42 chars)",
+      "fingerprint": "b426337d0014",
+      "risk_score": 90,
+      "severity": "critical",
+      "long_lived": true,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for api token",
+          "points": 80
+        },
+        {
+          "label": "Long-lived by design (valid until revoked)",
+          "points": 10
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "entry_index": 6,
+          "location": "request.header:Authorization",
+          "method": "GET",
+          "url": "https://acme.idp.example/api/v1/logs?since=2023-10-02T00%3A00%3A00Z&limit=20",
+          "timestamp": "2023-10-02T14:30:14Z"
+        }
+      ],
+      "recommendation": "Revoke the API token now. API tokens inherit the creating admin's privileges; replace it with a narrowly scoped OAuth service app."
+    },
+    {
+      "id": "HAR-005",
+      "kind": "access_token",
+      "name": "access_token",
+      "value_preview": "eyJ0eX...(297 chars)",
+      "fingerprint": "bfec3ea1c787",
+      "risk_score": 85,
+      "severity": "critical",
+      "long_lived": true,
+      "valid_at_capture": true,
+      "expires_at": "2023-10-30T14:30:00Z",
+      "lifetime_seconds": 2592000,
+      "factors": [
+        {
+          "label": "Base score for access token",
+          "points": 55
+        },
+        {
+          "label": "Still valid when the HAR was captured (replayable)",
+          "points": 10
+        },
+        {
+          "label": "Long-lived: lifetime 30d exceeds 8h",
+          "points": 10
+        },
+        {
+          "label": "Exposed in a URL (leaks via logs, proxies and Referer headers)",
+          "points": 10
+        }
+      ],
+      "jwt": {
+        "algorithm": "HS256",
+        "signature_present": true,
+        "issuer": "https://reports.acme.example",
+        "subject": "jordan.rivera@acme.example",
+        "audience": null,
+        "scopes": [
+          "reports.read",
+          "reports.export"
+        ],
+        "issued_at": "2023-09-30T14:30:00Z",
+        "expires_at": "2023-10-30T14:30:00Z",
+        "header": {
+          "typ": "JWT",
+          "alg": "HS256"
+        },
+        "payload": {
+          "iss": "https://reports.acme.example",
+          "sub": "jordan.rivera@acme.example",
+          "iat": 1696084200,
+          "exp": 1698676200,
+          "scope": "reports.read reports.export",
+          "synthetic": true
+        }
+      },
+      "occurrence_count": 2,
+      "occurrences": [
+        {
+          "entry_index": 7,
+          "location": "request.query:access_token",
+          "method": "GET",
+          "url": "https://reports.acme.example/export.csv?report=quarterly-access-review&access_token=[REDACTED:sha256=bfec3ea1c787]",
+          "timestamp": "2023-10-02T14:30:20Z"
+        },
+        {
+          "entry_index": 8,
+          "location": "request.referer:access_token",
+          "method": "GET",
+          "url": "https://cdn.acme.example/assets/css/report.css",
+          "timestamp": "2023-10-02T14:30:20.400000Z"
+        }
+      ],
+      "recommendation": "Revoke the token and shorten access-token lifetimes; never pass tokens in URLs and prefer sender-constrained tokens (DPoP or mTLS)."
+    },
+    {
+      "id": "HAR-006",
+      "kind": "refresh_token",
+      "name": "refresh_token",
+      "value_preview": "rtSYN1...(43 chars)",
+      "fingerprint": "248423d7a1a3",
+      "risk_score": 80,
+      "severity": "critical",
+      "long_lived": true,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for refresh token",
+          "points": 70
+        },
+        {
+          "label": "Long-lived by design (valid until revoked)",
+          "points": 10
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 2,
+      "occurrences": [
+        {
+          "entry_index": 3,
+          "location": "request.body:refresh_token",
+          "method": "POST",
+          "url": "https://acme.idp.example/oauth2/v1/token",
+          "timestamp": "2023-10-02T14:30:05Z"
+        },
+        {
+          "entry_index": 3,
+          "location": "response.body:refresh_token",
+          "method": "POST",
+          "url": "https://acme.idp.example/oauth2/v1/token",
+          "timestamp": "2023-10-02T14:30:05Z"
+        }
+      ],
+      "recommendation": "Revoke the refresh token (and its grant) immediately and enable refresh-token rotation."
+    },
+    {
+      "id": "HAR-007",
+      "kind": "access_token",
+      "name": "access_token",
+      "value_preview": "eyJraW...(824 chars)",
+      "fingerprint": "4f314f1d1118",
+      "risk_score": 75,
+      "severity": "high",
+      "long_lived": false,
+      "valid_at_capture": true,
+      "expires_at": "2023-10-02T15:30:04Z",
+      "lifetime_seconds": 3600,
+      "factors": [
+        {
+          "label": "Base score for access token",
+          "points": 55
+        },
+        {
+          "label": "Still valid when the HAR was captured (replayable)",
+          "points": 10
+        },
+        {
+          "label": "Carries privileged scopes or admin group claims",
+          "points": 10
+        }
+      ],
+      "jwt": {
+        "algorithm": "RS256",
+        "signature_present": true,
+        "issuer": "https://acme.idp.example",
+        "subject": "jordan.rivera@acme.example",
+        "audience": "https://acme.idp.example",
+        "scopes": [
+          "openid",
+          "profile",
+          "okta.users.manage",
+          "okta.groups.manage"
+        ],
+        "issued_at": "2023-10-02T14:30:04Z",
+        "expires_at": "2023-10-02T15:30:04Z",
+        "header": {
+          "kid": "SYN-kid-01",
+          "alg": "RS256"
+        },
+        "payload": {
+          "ver": 1,
+          "jti": "AT.SYNYDtAkrKr5JioFXCpEpumArrQ",
+          "iss": "https://acme.idp.example",
+          "aud": "https://acme.idp.example",
+          "iat": 1696257004,
+          "exp": 1696260604,
+          "cid": "0oaSYNadminConsole01",
+          "uid": "00uSYNv1ct1mAdm1n01",
+          "scp": [
+            "openid",
+            "profile",
+            "okta.users.manage",
+            "okta.groups.manage"
+          ],
+          "sub": "jordan.rivera@acme.example",
+          "synthetic": true
+        }
+      },
+      "occurrence_count": 2,
+      "occurrences": [
+        {
+          "entry_index": 3,
+          "location": "response.body:access_token",
+          "method": "POST",
+          "url": "https://acme.idp.example/oauth2/v1/token",
+          "timestamp": "2023-10-02T14:30:05Z"
+        },
+        {
+          "entry_index": 4,
+          "location": "request.header:Authorization",
+          "method": "GET",
+          "url": "https://acme.idp.example/api/v1/users?limit=25&filter=status+eq+%22ACTIVE%22",
+          "timestamp": "2023-10-02T14:30:06Z"
+        }
+      ],
+      "recommendation": "Revoke the token and shorten access-token lifetimes; never pass tokens in URLs and prefer sender-constrained tokens (DPoP or mTLS)."
+    },
+    {
+      "id": "HAR-008",
+      "kind": "basic_credentials",
+      "name": "Authorization",
+      "value_preview": "username=svc-wiki, password=********",
+      "fingerprint": null,
+      "risk_score": 75,
+      "severity": "high",
+      "long_lived": false,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for basic credentials",
+          "points": 75
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "entry_index": 10,
+          "location": "request.header:Authorization",
+          "method": "GET",
+          "url": "https://legacy-wiki.acme.example/rest/api/space?limit=10",
+          "timestamp": "2023-10-02T14:30:25Z"
+        }
+      ],
+      "recommendation": "Rotate the account password and replace Basic authentication with token-based auth."
+    },
+    {
+      "id": "HAR-009",
+      "kind": "session_token",
+      "name": "sessionToken",
+      "value_preview": "20111S...(48 chars)",
+      "fingerprint": "e3643c38881e",
+      "risk_score": 60,
+      "severity": "high",
+      "long_lived": false,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for session token",
+          "points": 50
+        },
+        {
+          "label": "Exposed in a URL (leaks via logs, proxies and Referer headers)",
+          "points": 10
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 2,
+      "occurrences": [
+        {
+          "entry_index": 0,
+          "location": "response.body:sessionToken",
+          "method": "POST",
+          "url": "https://acme.idp.example/api/v1/authn",
+          "timestamp": "2023-10-02T14:30:00Z"
+        },
+        {
+          "entry_index": 1,
+          "location": "request.query:token",
+          "method": "GET",
+          "url": "https://acme.idp.example/login/sessionCookieRedirect?token=[REDACTED:sha256=e3643c38881e]&redirectUrl=https://acme.idp.example/app/UserHome",
+          "timestamp": "2023-10-02T14:30:01Z"
+        }
+      ],
+      "recommendation": "One-time session tokens must be exchanged immediately and never placed in URLs that can be logged; revoke the resulting session."
+    },
+    {
+      "id": "HAR-010",
+      "kind": "session_cookie",
+      "name": "idx",
+      "value_preview": "idxSYN...(36 chars)",
+      "fingerprint": "03e7aec11d3b",
+      "risk_score": 60,
+      "severity": "high",
+      "long_lived": false,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for session cookie",
+          "points": 60
+        },
+        {
+          "label": "Browser-session cookie: valid until the server-side session ends",
+          "points": 0
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 3,
+      "occurrences": [
+        {
+          "entry_index": 1,
+          "location": "response.set-cookie:idx",
+          "method": "GET",
+          "url": "https://acme.idp.example/login/sessionCookieRedirect?token=[REDACTED:sha256=e3643c38881e]&redirectUrl=https://acme.idp.example/app/UserHome",
+          "timestamp": "2023-10-02T14:30:01Z"
+        },
+        {
+          "entry_index": 2,
+          "location": "request.cookie:idx",
+          "method": "GET",
+          "url": "https://acme.idp.example/app/UserHome",
+          "timestamp": "2023-10-02T14:30:02Z"
+        },
+        {
+          "entry_index": 11,
+          "location": "request.cookie:idx",
+          "method": "GET",
+          "url": "https://acme.idp.example/oauth2/v1/authorize?client_id=0oaSYNreportsApp0001&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Fapp.acme.example%2Fcallback&state=st53vWdjZ3iYoFUK8lXk&code_challenge=weAnekhNHGPQmJz5CSTycDBdW06RZWClRSqb8wrKEnf&code_challenge_method=S256",
+          "timestamp": "2023-10-02T14:30:30Z"
+        }
+      ],
+      "recommendation": "Terminate the session server-side and treat all activity after the capture time as suspect. Strip cookies from HAR files before sharing them."
+    },
+    {
+      "id": "HAR-011",
+      "kind": "session_cookie",
+      "name": "sid",
+      "value_preview": "102SYN...(28 chars)",
+      "fingerprint": "c85dd9d19760",
+      "risk_score": 60,
+      "severity": "high",
+      "long_lived": false,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for session cookie",
+          "points": 60
+        },
+        {
+          "label": "Browser-session cookie: valid until the server-side session ends",
+          "points": 0
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 3,
+      "occurrences": [
+        {
+          "entry_index": 1,
+          "location": "response.set-cookie:sid",
+          "method": "GET",
+          "url": "https://acme.idp.example/login/sessionCookieRedirect?token=[REDACTED:sha256=e3643c38881e]&redirectUrl=https://acme.idp.example/app/UserHome",
+          "timestamp": "2023-10-02T14:30:01Z"
+        },
+        {
+          "entry_index": 2,
+          "location": "request.cookie:sid",
+          "method": "GET",
+          "url": "https://acme.idp.example/app/UserHome",
+          "timestamp": "2023-10-02T14:30:02Z"
+        },
+        {
+          "entry_index": 11,
+          "location": "request.cookie:sid",
+          "method": "GET",
+          "url": "https://acme.idp.example/oauth2/v1/authorize?client_id=0oaSYNreportsApp0001&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Fapp.acme.example%2Fcallback&state=st53vWdjZ3iYoFUK8lXk&code_challenge=weAnekhNHGPQmJz5CSTycDBdW06RZWClRSqb8wrKEnf&code_challenge_method=S256",
+          "timestamp": "2023-10-02T14:30:30Z"
+        }
+      ],
+      "recommendation": "Terminate the session server-side and treat all activity after the capture time as suspect. Strip cookies from HAR files before sharing them."
+    },
+    {
+      "id": "HAR-012",
+      "kind": "id_token",
+      "name": "id_token",
+      "value_preview": "eyJraW...(828 chars)",
+      "fingerprint": "55401f706578",
+      "risk_score": 60,
+      "severity": "high",
+      "long_lived": false,
+      "valid_at_capture": true,
+      "expires_at": "2023-10-02T15:30:04Z",
+      "lifetime_seconds": 3600,
+      "factors": [
+        {
+          "label": "Base score for id token",
+          "points": 40
+        },
+        {
+          "label": "Still valid when the HAR was captured (replayable)",
+          "points": 10
+        },
+        {
+          "label": "Carries privileged scopes or admin group claims",
+          "points": 10
+        }
+      ],
+      "jwt": {
+        "algorithm": "RS256",
+        "signature_present": true,
+        "issuer": "https://acme.idp.example",
+        "subject": "00uSYNv1ct1mAdm1n01",
+        "audience": "0oaSYNadminConsole01",
+        "scopes": [],
+        "issued_at": "2023-10-02T14:30:04Z",
+        "expires_at": "2023-10-02T15:30:04Z",
+        "header": {
+          "kid": "SYN-kid-01",
+          "alg": "RS256"
+        },
+        "payload": {
+          "sub": "00uSYNv1ct1mAdm1n01",
+          "name": "Jordan Rivera",
+          "email": "jordan.rivera@acme.example",
+          "ver": 1,
+          "iss": "https://acme.idp.example",
+          "aud": "0oaSYNadminConsole01",
+          "iat": 1696257004,
+          "exp": 1696260604,
+          "jti": "ID.SYNWzWdy2t1AjwPwqO4KV177R4y",
+          "amr": [
+            "pwd"
+          ],
+          "auth_time": 1696257000,
+          "groups": [
+            "Everyone",
+            "Acme-Super-Admins"
+          ],
+          "synthetic": true
+        }
+      },
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "entry_index": 3,
+          "location": "response.body:id_token",
+          "method": "POST",
+          "url": "https://acme.idp.example/oauth2/v1/token",
+          "timestamp": "2023-10-02T14:30:05Z"
+        }
+      ],
+      "recommendation": "ID tokens describe a login and should not be used as API credentials; review the client and revoke the related session."
+    },
+    {
+      "id": "HAR-013",
+      "kind": "device_token",
+      "name": "DT",
+      "value_preview": "dtSYNb...(41 chars)",
+      "fingerprint": "7b305ba6d2d2",
+      "risk_score": 55,
+      "severity": "medium",
+      "long_lived": true,
+      "valid_at_capture": true,
+      "expires_at": "2028-09-30T14:30:00Z",
+      "lifetime_seconds": 157680000,
+      "factors": [
+        {
+          "label": "Base score for device token",
+          "points": 35
+        },
+        {
+          "label": "Still valid when the HAR was captured (replayable)",
+          "points": 10
+        },
+        {
+          "label": "Long-lived: lifetime 1825d exceeds 8h",
+          "points": 10
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 4,
+      "occurrences": [
+        {
+          "entry_index": 0,
+          "location": "response.set-cookie:DT",
+          "method": "POST",
+          "url": "https://acme.idp.example/api/v1/authn",
+          "timestamp": "2023-10-02T14:30:00Z"
+        },
+        {
+          "entry_index": 1,
+          "location": "request.cookie:DT",
+          "method": "GET",
+          "url": "https://acme.idp.example/login/sessionCookieRedirect?token=[REDACTED:sha256=e3643c38881e]&redirectUrl=https://acme.idp.example/app/UserHome",
+          "timestamp": "2023-10-02T14:30:01Z"
+        },
+        {
+          "entry_index": 2,
+          "location": "request.cookie:DT",
+          "method": "GET",
+          "url": "https://acme.idp.example/app/UserHome",
+          "timestamp": "2023-10-02T14:30:02Z"
+        },
+        {
+          "entry_index": 11,
+          "location": "request.cookie:DT",
+          "method": "GET",
+          "url": "https://acme.idp.example/oauth2/v1/authorize?client_id=0oaSYNreportsApp0001&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Fapp.acme.example%2Fcallback&state=st53vWdjZ3iYoFUK8lXk&code_challenge=weAnekhNHGPQmJz5CSTycDBdW06RZWClRSqb8wrKEnf&code_challenge_method=S256",
+          "timestamp": "2023-10-02T14:30:30Z"
+        }
+      ],
+      "recommendation": "Reset device trust for the user: a copied device token can make an attacker's browser look like a known device and weaken risk-based checks."
+    },
+    {
+      "id": "HAR-014",
+      "kind": "oauth_code",
+      "name": "code",
+      "value_preview": "acSYNs...(33 chars)",
+      "fingerprint": "e27a9b39eba0",
+      "risk_score": 35,
+      "severity": "medium",
+      "long_lived": false,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for oauth code",
+          "points": 25
+        },
+        {
+          "label": "Exposed in a URL (leaks via logs, proxies and Referer headers)",
+          "points": 10
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "entry_index": 11,
+          "location": "response.redirect:code",
+          "method": "GET",
+          "url": "https://acme.idp.example/oauth2/v1/authorize?client_id=0oaSYNreportsApp0001&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Fapp.acme.example%2Fcallback&state=st53vWdjZ3iYoFUK8lXk&code_challenge=weAnekhNHGPQmJz5CSTycDBdW06RZWClRSqb8wrKEnf&code_challenge_method=S256",
+          "timestamp": "2023-10-02T14:30:30Z"
+        }
+      ],
+      "recommendation": "Authorization codes are single-use and short-lived; make sure PKCE is enforced so an intercepted code is useless."
+    },
+    {
+      "id": "HAR-015",
+      "kind": "csrf_token",
+      "name": "X-Okta-XsrfToken",
+      "value_preview": "xsrfSY...(31 chars)",
+      "fingerprint": "6b3ed602aa1f",
+      "risk_score": 15,
+      "severity": "low",
+      "long_lived": false,
+      "valid_at_capture": null,
+      "expires_at": null,
+      "lifetime_seconds": null,
+      "factors": [
+        {
+          "label": "Base score for csrf token",
+          "points": 15
+        }
+      ],
+      "jwt": null,
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "entry_index": 4,
+          "location": "request.header:X-Okta-XsrfToken",
+          "method": "GET",
+          "url": "https://acme.idp.example/api/v1/users?limit=25&filter=status+eq+%22ACTIVE%22",
+          "timestamp": "2023-10-02T14:30:06Z"
+        }
+      ],
+      "recommendation": "Low risk on its own: it is bound to the session, so revoking the session invalidates it."
+    },
+    {
+      "id": "HAR-016",
+      "kind": "jwt",
+      "name": "embedded JWT",
+      "value_preview": "eyJ0eX...(277 chars)",
+      "fingerprint": "0172412da252",
+      "risk_score": 10,
+      "severity": "low",
+      "long_lived": false,
+      "valid_at_capture": false,
+      "expires_at": "2023-09-23T14:30:00Z",
+      "lifetime_seconds": 86400,
+      "factors": [
+        {
+          "label": "Base score for jwt",
+          "points": 45
+        },
+        {
+          "label": "Already expired when the HAR was captured",
+          "points": -35
+        }
+      ],
+      "jwt": {
+        "algorithm": "HS256",
+        "signature_present": true,
+        "issuer": "https://reports.acme.example",
+        "subject": "jordan.rivera@acme.example",
+        "audience": null,
+        "scopes": [
+          "reports.read"
+        ],
+        "issued_at": "2023-09-22T14:30:00Z",
+        "expires_at": "2023-09-23T14:30:00Z",
+        "header": {
+          "typ": "JWT",
+          "alg": "HS256"
+        },
+        "payload": {
+          "iss": "https://reports.acme.example",
+          "sub": "jordan.rivera@acme.example",
+          "iat": 1695393000,
+          "exp": 1695479400,
+          "scope": "reports.read",
+          "synthetic": true
+        }
+      },
+      "occurrence_count": 1,
+      "occurrences": [
+        {
+          "entry_index": 2,
+          "location": "response.body:embedded JWT",
+          "method": "GET",
+          "url": "https://acme.idp.example/app/UserHome",
+          "timestamp": "2023-10-02T14:30:02Z"
+        }
+      ],
+      "recommendation": "Identify the issuing system from the claims and revoke the token if still valid."
+    }
+  ]
+}
