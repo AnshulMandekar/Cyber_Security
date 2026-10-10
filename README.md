@@ -36,23 +36,28 @@ simulator from the original brief is not implemented; see section 1.)
 | 4 | Timeline builder | One ordered, MITRE ATT&CK-tagged incident timeline linking the HAR, the logs and the alerts | Done |
 | 5 | Mitigation simulator | Before/after attacker success with controls switched on | **Not implemented** (only `models.py` exists) |
 | 6 | Report summarizer | Plain-English incident summary, from an offline template or from Claude | Done |
-| – | Web dashboard (React + Vite), PDF export | | **Not built** |
+| – | Web dashboard, PDF export | Replaced by the interactive API explorer at `/docs` (FastAPI Swagger UI); no PDF export | **Not in scope** |
 
-**How you use it today.** There are two ways in, and both work offline:
+**How you use it today.** There are three ways in, and all work offline:
+
+- **Windows exe.** `dist/OktaTrace-API.exe` (no Python needed) starts the API server;
+  open <http://127.0.0.1:8000/docs>. Rebuild it from the project root with
+  `pip install pyinstaller` then
+  `pyinstaller --onefile --name OktaTrace-API --paths backend --collect-submodules oktatrace --collect-submodules uvicorn --hidden-import multipart scripts/server_launcher.py`.
 
 - **Command line.** One small program per module (section 3.1).
 - **API explorer in your browser.** Start the server and open
   <http://127.0.0.1:8000/docs>: every endpoint has a form, and you can upload a
   HAR file from there (section 3.2).
 
-There is no custom dashboard yet, and no one-click "run everything and show me
-a web page" script. `python scripts/generate_samples.py` is the closest thing:
+The API explorer is the dashboard: there is no separate React front end, and no
+one-click "run everything and show me a web page" script. `python scripts/generate_samples.py` is the closest thing:
 it rebuilds every sample data file in one go.
 
 ## 2. Setup
 
 **You need:** Python 3.11 or newer (developed on 3.14), Git, and internet access for
-`pip install`. You do **not** need Node.js (there is no front end yet), a database
+`pip install`. You do **not** need Node.js (there is no separate front end), a database
 server (SQLite is built in) or an API key (the LLM summary is optional).
 
 > **Which folder do I run from?** Two folders matter.
@@ -184,6 +189,20 @@ This rewrites the 9 files in `data/samples/` (sample HAR, redacted HAR, findings
 system log, ground truth, directory, detections, timeline, template summary). The
 output is deterministic: running it again gives byte-identical content. If `git status`
 then lists those files as modified, it is only line endings (LF vs CRLF), not content.
+
+### 3.2a Quickest start: the Windows exe (no Python needed)
+
+1. Open the `dist` folder and double-click `OktaTrace-API.exe` (or run
+   `.\dist\OktaTrace-API.exe` in PowerShell). A console window opens and prints
+   `OktaTrace API on http://127.0.0.1:8000/docs`. Windows SmartScreen may warn about
+   an unsigned app: choose **More info**, then **Run anyway**.
+2. Open <http://127.0.0.1:8000/docs> in your browser and use the endpoints exactly as
+   described in section 3.2 below (**Try it out**, then **Execute**).
+3. Press `Ctrl+C` or close the console window to stop it.
+
+The exe creates a `data` folder next to itself on first use. To use another port, set
+`OKTATRACE_PORT` first (PowerShell: `$env:OKTATRACE_PORT=8001`). The exe runs the API
+server only; the per-module command-line tools in section 3.1 need Python.
 
 ### 3.2 The API explorer in your browser
 
@@ -818,14 +837,14 @@ and the project differ.
 | Report section | What OktaTrace provides | Status |
 |----------------|------------------------|--------|
 | 3.6 Laboratory design principles | Synthetic data only, seeded randomness, deterministic rules, every alert carries evidence, the LLM confined to Module 6 | Supported |
-| 4.1 / 4.2 System overview, technology stack | Python 3.11+, FastAPI, SQLite, pytest. The React dashboard is not built | Partly |
+| 4.1 / 4.2 System overview, technology stack | Python 3.11+, FastAPI, SQLite, pytest. No React dashboard; the FastAPI API explorer is used instead | Partly |
 | 4.3 / 4.4 HAR anatomy, Module 1 | `data/samples/support_case_00421.har` (12 requests, 16 secrets), the scoring tables in the Module 1 section, redaction | Supported; redaction uses fingerprinted markers, not length-preserving ones |
 | 4.5 Module 2 | Log generator, 51 principals, 5,788 events, labelled attack, edge cases | Supported; field names and the attack steps differ from the report text |
 | 4.6 Module 3 | `OT-DET-001` to `OT-DET-007`, per-rule unit tests, precision/recall | Supported; two rules differ from the report's R6 and R7 |
 | 4.7 Module 4 | `timeline.json`, ATT&CK tags, evidence references, the inferred extraction step | Supported; entries are chronological, not grouped by session |
 | 4.8 Module 5 | | **Not implemented** |
 | 4.9 Module 6 | Template or Claude summary with an ID check | Supported |
-| 4.10 Dashboard | Only the API explorer at `/docs`; JSON available through the API, no PDF export | **Not built** |
+| 4.10 Dashboard | The API explorer at `/docs` serves as the dashboard; JSON available through the API, no PDF export | Partly |
 | 4.11 Testing and reproducibility | 204 tests, seeded generation, `scripts/generate_samples.py` | Supported |
 | 5.4 ATT&CK mapping | The timeline's technique table for the synthetic scenario | Supported (lab mapping, wider than the real-incident table) |
 | 5.7 Dataset, HAR and detection tables | Counts and metrics from the commands in section 3.1 | Supported; per-rule recall/F1 and time-to-detect are not produced by the tool |
